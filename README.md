@@ -14,7 +14,7 @@ Then browse to:
     
 That's it. 
 
-## Preparations before actualt sensing with Arduino
+## Preparations before actual sensing with Arduino
 
 ### Prerequisites
 * Arduino 
