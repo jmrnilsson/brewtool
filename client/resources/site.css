@@ -3,6 +3,18 @@
     src: url(/resources/leaguegothic-regular-webfont.ttf) format("truetype");
 }
 
+.logo {
+    text-transform: uppercase; 
+	font-family: "league-gothic-1",Impact,sans-serif;
+    font-weight: 125%;
+    line-height: 130%;
+}
+
+ .navbar-default .navbar-nav > .active{
+    color: #000;
+   background: #d65c14;
+ }
+
 h1, .h1 {
 	text-transform: uppercase; 
 	font-family: "league-gothic-1",Impact,sans-serif;
@@ -10,8 +22,6 @@ h1, .h1 {
     font-weight: normal;
     line-height: 140px;
     color: #888;
-    /* text-align: center;
-    padding-top: 40px; */
 }
 
 h2, .h2 {
