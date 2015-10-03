@@ -1,0 +1,43 @@
+@font-face {
+    font-family: "league-gothic-1";
+    src: url(/resources/leaguegothic-regular-webfont.ttf) format("truetype");
+}
+
+h1, .h1 {
+	text-transform: uppercase; 
+	font-family: "league-gothic-1",Impact,sans-serif;
+	font-size: 136px;
+    font-weight: normal;
+    line-height: 140px;
+    color: #888;
+    /* text-align: center;
+    padding-top: 40px; */
+}
+
+h2, .h2 {
+	text-transform: uppercase; 
+	font-family: "league-gothic-1",Impact,sans-serif;
+	font-size: 24px;
+    font-weight: normal;
+    line-height: 30px;
+    color: #888;
+    text-align: left;
+}
+
+h3, .h3 {
+	text-transform: uppercase; 
+	font-family: "league-gothic-1",Impact,sans-serif;
+	font-size: 18px;
+    font-weight: normal;
+    line-height: 50px;
+    color: #888;
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+i {
+	color: #888;
+}

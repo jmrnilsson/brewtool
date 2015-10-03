@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Alcohol by volume</h2>
+      <i class="fa fa-refresh fa-5x" style="display: none;"></i>
+      <h1 id="abv" data-bind="text: alcoholByVolumeText()"></h1>
+    </div>
+    <div class="col-md-4">
+      <h2>Parameters</h2>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="og" class="col-sm-5 control-label">Mode</label>
+          <div class="col-sm-7">
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                <span data-bind="text: modeText()"></span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" data-bind="click: function(data, event) { mode('simple', data, event) }">Simple</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" data-bind="click: function(data, event) { mode('compensated', data, event) }">Compensated</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" data-bind="click: function(data, event) { mode('plato', data, event) }" href="#">Plato</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="og" class="col-sm-5 control-label">Original gravity</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" id="og" placeholder="(e.g. 1050)" data-bind="value: originalGravity">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fg" class="col-sm-5 control-label">Final gravity</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" id="fg" placeholder="(e.g. 1010)" data-bind="value: finalGravity">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-5 col-sm-7">
+            <button type="submit" class="btn btn-default" data-bind="click: calculate">Calculate</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <h2>General information</h2>
+      <p>This calculator assumes you're measuring gravity at calibration temperature. This usually means that measurement take place at:</p>
+      <ul>
+        <li>20 °C for modern hydrometers</li>
+        <li>15 °C for old hydrometers</li>
+      </ul>
+      <h2>Links</h2>
+      <p>Plenty other calculators exists. Here are a few alternatives:</p>
+      <ul>
+        <li><a target="_blank" href="http://www.brewersfriend.com/hydrometer-temp/">Hydrometer Temperature Adjustment Calculator</a></li>
+        <li><a target="_blank" href="http://www.brewersfriend.com/abv-calculator/">Alcohol By Volume ABV Calculator</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

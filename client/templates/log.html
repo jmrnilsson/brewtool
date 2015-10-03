@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+        <h2>Filter</h2>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <input type="checkbox" aria-label="..." disabled="disabled" data-bind="checked: enabledFilter"> 
+          </span>
+          <input type="text" class="form-control" aria-label="..." data-bind="textInput: query">
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Events</h2>
+        <table class="table">
+          <thead>
+              <tr>
+                <th class="col-sm-2">Name</th>
+                <th class="col-sm-3">Date and time</th> 
+                <th class="col-sm-7">Data</th>              
+          </thead>
+          <tbody data-bind="foreach: filteredEvents">
+              <tr>
+                <td data-bind="text: topic"></td>
+                <td data-bind="text: created"></td>
+                <td data-bind="text: JSON.stringify(data).substring(0, 80); ;"></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>

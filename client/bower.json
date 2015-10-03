@@ -1,0 +1,32 @@
+{
+  "name": "Brew Tools",
+  "version": "0.0.0.2",
+  "description": "App for measuring temperature and calculating ABV",
+  "main": "bower.json",
+  "moduleType": [
+    "amd"
+  ],
+  "license": [
+    "MIT",
+    "CC-BY-3.0"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "knockout": "~3.3.0",
+    "font-awesome": "fontawesome#~4.4.0",
+    "bootstrap": "~3.3.5",
+    "toastr": "~2.1.2",
+    "requirejs": "~2.1.20",
+    "pathjs": "*",
+    "text": "~2.0.14",
+    "jasmine-core": "jasmine#~2.3.4",
+    "socket.io-client": "~1.3.7"
+  }
+}

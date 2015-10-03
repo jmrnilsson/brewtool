@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Temperature</h2>
+      <h1 id="bigTemperature" data-bind="text: temperatureText()"></h1>
+    </div>
+    <div class="col-md-4">
+      <h2>Metrics</h2>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="temperature" class="col-sm-5 control-label">Temperature</label>
+          <p class="form-control-static col-sm-7" id="temperature" data-bind="text: temperatureText()"></p>
+        </div>
+        <div class="form-group">
+          <label for="low" class="col-sm-5 control-label">Low</label>
+          <p class="form-control-static col-sm-7" id="low" data-bind="text: lowText()"></p>
+        </div>
+        <div class="form-group">
+          <label for="high" class="col-sm-5 control-label">High</label>
+          <p class="form-control-static col-sm-7" id="high" data-bind="text: highText()"></p>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-5 col-sm-7">
+            <button type="submit" class="btn btn-default" data-bind="click: clear">Clear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <h2>Alarm</h2>
+      <form class="form-horizontal" data-bind="with: alarm">
+        <div class="form-group">
+          <label for="alarm0" class="col-sm-5 control-label">Low threshold</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" id="alarm0" placeholder="(e.g. 66)" data-bind="value: low">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="alarm1" class="col-sm-5 control-label">High threshold</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" id="alarm1" placeholder="(e.g. 72)" data-bind="value: high">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="alarm2" class="col-sm-5 control-label">Enable sound</label>
+          <div  class="col-sm-7" id="alarm2">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="alarm2" data-bind="checked: active">
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>  
+    </div>
+  </div>
+</div>  
+
