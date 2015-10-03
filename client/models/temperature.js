@@ -48,7 +48,7 @@ define([
         highTemperature(null);
     };
 
-    var MonitorViewModel = function(){
+    var TemperatureViewModel = function(){
         var self = this;
 
         // observables
@@ -61,5 +61,5 @@ define([
         self.clear = clear;
     };
 
-    return MonitorViewModel;
+    return TemperatureViewModel;
 });
