@@ -38,12 +38,13 @@ To start sensing with arduino
 * Flash the arduino
 * Attach it with USB
 * Install python and type the following the "server" folder 
-
-    npm install express serialport socket.io
-    node daemonFake.js
-
 * Start 'node daemon.js'
 * Browse to http://localhost:3000/
+
+To make sure all installed type:
+
+        npm install express serialport socket.io
+        node daemonFake.js
 
 ## Info on how to include Arduino libraries
 See http://arduino.cc/en/Guide/Libraries
