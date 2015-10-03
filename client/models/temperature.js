@@ -5,54 +5,44 @@ define([
 ], function (ko, events, alarm) {
 'use strict';
     
-    var lowTemperature = ko.observable();
-    var highTemperature = ko.observable();
-
-    var sense = ko.pureComputed(function(){
-        return ko.utils.arrayFirst(events.events(), function(event){
+    var low = ko.observable();
+    var high = ko.observable();
+    var temp = ko.pureComputed(function(){
+        var first = ko.utils.arrayFirst(events.events(), function(event){
             return event.topic === 'sense-temperature';
         });
+        return first ? first.data.temperature : '';
     });
-    
-    sense.subscribe(function(){
-        var temp = sense().data.temperature;
-        if (lowTemperature() == undefined || lowTemperature() > temp){
-            lowTemperature(temp);
-        }
-        if (highTemperature() == undefined || highTemperature() < temp){
-            highTemperature(temp);
-        }
+    var tempText = ko.pureComputed(function(){
+        return temp() ? temp() + ' °C': '';
     });
+    var lowText = ko.pureComputed(function(){
+        return low() ? low() + ' °C' : '';
+    });
+    var highText = ko.pureComputed(function(){
+        return high() ? high() + ' °C' : '';
+    }); 
 
-    var temperatureText = ko.computed(function(){
-        if (sense() != undefined){
-            return sense().data.temperature + ' °C';
+    temp.subscribe(function(){
+        var t = temp();
+        if (low() == undefined || low() > t){
+            low(t);
         }
-        return '';
-    });
-    var lowText = ko.computed(function(){
-        if (lowTemperature() != undefined){
-            return lowTemperature() + ' °C';
+        if (high() == undefined || high() < t){
+            high(t);
         }
-        return '';
-    });
-    var highText = ko.computed(function(){
-        if (highTemperature() != undefined){
-            return highTemperature() + ' °C';
-        }
-        return '';
     });
 
     function clear(){
-        lowTemperature(null);
-        highTemperature(null);
+        low(null);
+        high(null);
     };
 
     var TemperatureViewModel = function(){
         var self = this;
 
         // observables
-        self.temperatureText = temperatureText;
+        self.tempText = tempText;
         self.lowText = lowText;
         self.highText  = highText;
         self.alarm = alarm;
