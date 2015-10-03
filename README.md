@@ -22,7 +22,7 @@ Then browse to:
     
     http://localhost:3000/
     
-That's it. Btw, there may be dependencies to python from socket.io. There definately is a dependency to python from serialport (which is used for the Arduino sensing setup mentioned below).
+That's it. Btw, there may be dependencies to python from socket.io. There definately is a dependency to python 2.7.* from serialport (which is used for the Arduino sensing setup mentioned below).
 
 ## Preparations before actual sensing with Arduino
 
