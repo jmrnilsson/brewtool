@@ -1,7 +1,7 @@
 # brewtool
 
 ## Description
-Application for monitoring temperature for brewing. It also provides a calculator and has a log thingy. It intended to be used with an Arduino. It does include a fake daemon that "simulate" temperature changes and that sends over websockets. 
+Application for monitoring brewing temperature when brewing beer or really just anything. It also provides a calculator and has a log thingy. It is intended to be used with an Arduino, but does include a fake daemon that "simulate" temperature changes and that sends over websockets. 
 
 ## Simplified setup
 To simulate temperature reading start express and socket.io browser into the "server" folder and type:
