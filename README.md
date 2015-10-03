@@ -17,16 +17,14 @@ Still in the __server__ directory, type:
 
         node daemonFake.js
 
-That's the setup. To start NodeJS, express and socket.io
-
-Then browse to:
+That's the setup. Nodejs, Express and socket.io should be up and running. Then you should be able to browse to:
     
     http://localhost:3000/
     
 That's it. Btw, there may be dependencies to python from socket.io. There is a dependency to python 2.7.* from serialport (which is used for the Arduino sensing setup mentioned below).
 
-## Preparations before actual sensing with Arduino
-### Prerequisites
+## Setup with sensing
+### Prerequisites before actual sensing with Arduino
 * Arduino 
 * USB-cable
 * Temperature sensor (supporting OneWire, i.e. DS18B20, DS1822, DS1820)
