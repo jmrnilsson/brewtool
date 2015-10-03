@@ -25,7 +25,6 @@ Then browse to:
 That's it. Btw, there may be dependencies to python from socket.io. There is a dependency to python 2.7.* from serialport (which is used for the Arduino sensing setup mentioned below).
 
 ## Preparations before actual sensing with Arduino
-
 ### Prerequisites
 * Arduino 
 * USB-cable
@@ -36,14 +35,14 @@ That's it. Btw, there may be dependencies to python from socket.io. There is a d
 To start sensing with arduino 
 * Configure  the identity of the temperature sensor OneWire DeviceAddress in the script called arduino_temp_read.ino
 * Install python 2.7.x 
+* Connect temperature sensor, USB a.s.o
 * Make sure all the node packages are installed (see below)
-* Start 'node daemon.js'
 * Browse to http://localhost:3000/
 
 To make sure all packages are installed type:
 
         npm install express serialport socket.io
-        node daemonFake.js
+        node daemon.js
 
 ## Info on how to include Arduino libraries
 See http://arduino.cc/en/Guide/Libraries
