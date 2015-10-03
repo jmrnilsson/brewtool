@@ -4,19 +4,20 @@
 A small web application for monitoring brewing temperature when brewing beer or really anything. It also provides a calculator and has a log thingy. It is intended to be used with an Arduino, but does include a fake daemon to "simulate" temperature changes. 
 
 ## Simplified setup (without Arduino sensing)
-To get started go clone the repo and go to  __server__ directory and type: 
-
-    npm install express socket.io
-
-
-Then, go to the __client__ direcotory and type:
+To get started clone the repo and go to the  __client__ directory and type:
     
     npm install -g bower
     bower install
-    
-That's the setup. To start NodeJS, express and socket.io
+
+Then, go to the  __server__ directory and type: 
+
+    npm install express socket.io
+
+Still in the __server__ directory, type:
 
         node daemonFake.js
+
+That's the setup. To start NodeJS, express and socket.io
 
 Then browse to:
     
