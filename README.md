@@ -18,13 +18,11 @@ That's the setup. To start NodeJS, express and socket.io
 
         node daemonFake.js
 
-Then browser into the "server" folder type,
-
 Then browse to:
     
     http://localhost:3000/
     
-That's it. 
+That's it. Btw, there may be a dependency to python from socket.io. There definately is a dependency to python from serialport.
 
 ## Preparations before actual sensing with Arduino
 
