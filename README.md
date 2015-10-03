@@ -1,18 +1,24 @@
 # brewtool
 
 ## Description
-Application for monitoring brewing temperature when brewing beer or really just anything. It also provides a calculator and has a log thingy. It is intended to be used with an Arduino, but does include a fake daemon that "simulate" temperature changes and that sends over websockets. 
+A small web application for monitoring brewing temperature when brewing beer or really anything. It also provides a calculator and has a log thingy. It is intended to be used with an Arduino, but does include a fake daemon to "simulate" temperature changes. 
 
 ## Simplified setup
-To simulate temperature reading start express and socket.io browser into the "client" folder and type:
+To get started go clone the repo and go to  __server__ directory and type: 
+
+    npm install express socket.io
+
+
+Then, go to the __client__ direcotory and type:
     
     npm install -g bower
     bower install
+    
+That's the setup. To start NodeJS, express and socket.io
+
+        node daemonFake.js
 
 Then browser into the "server" folder type,
-
-    npm install express socket.io
-    node daemonFake.js
 
 Then browse to:
     
