@@ -40,3 +40,7 @@ To start sensing with arduino
 
 * Start 'node daemon.js'
 * Browse to http://localhost:3000/
+
+## Info on how to include Arduino libraries
+See http://arduino.cc/en/Guide/Libraries
+
