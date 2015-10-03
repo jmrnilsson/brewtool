@@ -1,12 +1,14 @@
 define([
   'knockout',
   'path',
-  'models/events'
-], function(ko, Path, events){
+  'models/events',
+  'jquery'
+], function(ko, Path, events, $){
 
   var version = [0, 0, 0, 2];
 
   function start(){
+    
     // Register ko
     ko.components.register('temperature', { require: 'views/temperatureView' });
     ko.components.register('calculator', { require: 'views/calculatorView' });
@@ -25,9 +27,10 @@ define([
     // Attach listener (this also wires socket.io)
     events.attach();
     
-    document.getElementById('app-version').innerHTML = version.join('.');;
-    
-    ko.applyBindings(Routes, document.getElementById('content'));
+    $(function(){
+      document.getElementById('app-version').innerHTML = version.join('.');;
+      ko.applyBindings(Routes, document.getElementById('content'));
+    });
   }
 
   return {

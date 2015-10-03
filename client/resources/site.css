@@ -10,11 +10,6 @@
     line-height: 130%;
 }
 
- .navbar-default .navbar-nav > .active{
-    color: #000;
-   background: #d65c14;
- }
-
 h1, .h1 {
 	text-transform: uppercase; 
 	font-family: "league-gothic-1",Impact,sans-serif;
