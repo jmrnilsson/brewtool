@@ -14,12 +14,10 @@ define([
 
     var filteredEvents = ko.computed(function(){
         var currentQuery = query();
-        if (currentQuery == undefined || currentQuery == '')
-        {
+        if (currentQuery == undefined || currentQuery == ''){
             return e.events().slice(0, 250);
         }
-        else
-        {
+        else{
             return ko.utils.arrayFilter(e.events(), function(ev){
                 return ev.topic.indexOf(currentQuery) > -1;
             });
@@ -27,7 +25,7 @@ define([
     }); 
 
     function LogViewModel(){
-        self = this;
+        var self = this;
         self.filteredEvents = filteredEvents;
         self.query = query;
         self.enabledFilter = enabledFilter;

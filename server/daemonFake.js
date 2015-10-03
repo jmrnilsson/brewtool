@@ -12,12 +12,13 @@ console.log('Listening on port ' + configurationPort + '.\nPress ctrl + c to clo
 server.listen(configurationPort);
 
 var push = function (temperature) {
- setTimeout(function() { 
-  io.sockets.emit('sense-temperature', {temperature: temperature, utc: new Date().toUTCString()});
-
-  var newTemp = Math.floor(Math.random() * 3) - 1 + temperature;
-
-  push(newTemp); }, 2000); 
+  setTimeout(function() { 
+    io.sockets.emit('sense-temperature', {
+        temperature: temperature, 
+        utc: new Date().toUTCString()
+      });
+    push(Math.floor(Math.random() * 3) - 1 + temperature); 
+  }, 2000); 
 }
 
 push(Math.floor((Math.random() * 100) + 1));
