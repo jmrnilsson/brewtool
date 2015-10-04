@@ -5,7 +5,7 @@ A small web application for monitoring brewing temperature when brewing beer or 
 
 ## Simplified setup (without Arduino sensing)
 To get started clone the repo and go to the  __client__ directory and type:
-    
+
     npm install -g bower
     bower install
 
@@ -15,10 +15,10 @@ Then, go to the  __server__ directory and type:
 
 Still in the __server__ directory, type:
 
-        node daemonFake.js
+    node daemonFake.js
 
 That's the setup. Nodejs, Express and socket.io should be up and running. Then you should be able to browse to:
-    
+
     http://localhost:3000/
     
 That's it. Btw, there may be dependencies to python from socket.io. There is a dependency to python 2.7.* from serialport (which is used for the Arduino sensing setup mentioned below).
@@ -27,22 +27,25 @@ That's it. Btw, there may be dependencies to python from socket.io. There is a d
 ### Prerequisites before actual sensing with Arduino
 * Arduino 
 * USB-cable
-* Temperature sensor (supporting OneWire, i.e. DS18B20, DS1822, DS1820)
+* Waterproof temperature sensor supporting OneWire (i.e. DS18B20, DS1822, DS1820)
 * Library: Dallas Temperature, https://github.com/milesburton/Arduino-Temperature-Control-Library
 * Library: OneWire, http://playground.arduino.cc/Learning/OneWire
+* Install Python 2.7.x, https://www.python.org/downloads/. This is used by SerialPort during package installation and creates OS-specific packages.
+* Install Arduino Software, IDE https://www.arduino.cc/en/Guide/HomePage
 
-To start sensing with arduino 
-* Configure  the identity of the temperature sensor OneWire DeviceAddress in the script called arduino_temp_read.ino
-* Install python 2.7.x 
+### To start sensing with arduino 
+* Configure  the identity of the temperature sensor OneWire DeviceAddress in the script  __./arduino/arduino_temperature_sensing.ino__
 * Connect temperature sensor, USB a.s.o
 * Make sure all the node packages are installed (see below)
 * Browse to http://localhost:3000/
 
-To make sure all packages are installed type:
+To make sure all packages are installed type in the root of the repository:
 
-        npm install express serialport socket.io
-        node daemon.js
+    cd server
+    npm install express serialport socket.io
+    node daemon.js
+    cd ../client
+    bower install
 
-## Info on how to include Arduino libraries
-See http://arduino.cc/en/Guide/Libraries
-
+### Additional information about the Arduino setup
+For information on how to include Arduino libraries see http://arduino.cc/en/Guide/Libraries. How to wire or solder the temperature sensor is detailed at http://www.hobbytronics.co.uk/ds18b20-arduino.
