@@ -2,10 +2,11 @@ define([
   'knockout',
   'path',
   'models/events',
-  'jquery'
-], function(ko, Path, events, $){
+  'jquery',
+  'text!../../bower.json'
+], function(ko, Path, events, $, bower){
 
-  var version = [0, 0, 0, 2];
+  var bowerPackage = JSON.parse(bower);
 
   function start(){
     
@@ -28,7 +29,8 @@ define([
     events.attach();
     
     $(function(){
-      document.getElementById('app-version').innerHTML = version.join('.');;
+      document.title = bowerPackage.name + " " + bowerPackage.version;
+      document.getElementById('app-version').innerHTML = bowerPackage.version;
       ko.applyBindings(Routes, document.getElementById('content'));
     });
   }
