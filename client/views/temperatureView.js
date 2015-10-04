@@ -1,6 +1,6 @@
 define([
 	'models/temperature',
-	'text!../../templates/temperature.html'
+	'text!/templates/temperature.html'
 ], function (viewModel, template) {
 'use strict';
 

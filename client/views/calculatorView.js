@@ -1,6 +1,6 @@
 define([
 	'models/calculator',
-	'text!../../templates/calculator.html'
+	'text!/templates/calculator.html'
 ], function (viewModel, template) {
 'use strict';
 

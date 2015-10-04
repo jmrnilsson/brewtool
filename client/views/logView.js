@@ -1,6 +1,6 @@
 define([
 	'models/log',
-	'text!../../templates/log.html'
+	'text!/templates/log.html'
 ], function (viewModel, template) {
 'use strict';
 

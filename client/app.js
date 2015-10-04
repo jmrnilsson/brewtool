@@ -3,7 +3,7 @@ define([
   'path',
   'models/events',
   'jquery',
-  'text!../../bower.json'
+  'text!./bower.json'
 ], function(ko, Path, events, $, bower){
 
   var bowerPackage = JSON.parse(bower);
