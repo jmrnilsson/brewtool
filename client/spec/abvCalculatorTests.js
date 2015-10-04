@@ -1,4 +1,4 @@
-define(['models/abvCalculator'], function(AbvCalculator){
+define(['util/abvCalculator'], function(AbvCalculator){
 
   describe("Given OG 1050 and FG 1010", function() {
     var calc;

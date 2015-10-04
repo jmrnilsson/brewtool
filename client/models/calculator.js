@@ -1,20 +1,20 @@
 define([
     'knockout',
-    'models/abvCalculator',
+    'util/abvCalculator',
     'toastr',
-    'models/events'
-], function (ko, AbvCalculator, toastr, events) {
+    'models/events',
+    'models/gravity'
+], function (ko, Abv, toastr, events, Gravity) {
 'use strict';
 
-    var originalGravity = ko.observable('1050').extend({gravity: "" });
-    var finalGravity = ko.observable('1010').extend({gravity: "" });
+    var gravity = new Gravity(1050, 1010);
     var mode = ko.observable('compensated');
     var modeText = ko.pureComputed(function(){return mode().charAt(0).toUpperCase() + mode().slice(1);});
     var alcoholByVolume = ko.observable();
     var alcoholByVolumeText = ko.pureComputed(function(){ return alcoholByVolume() ?  alcoholByVolume() + ' %' : 'N/A'});
 
     function calculate(data, event){
-        var model = new AbvCalculator(originalGravity(), finalGravity());
+        var model = new Abv(gravity.original(), gravity.final());
         model.alcoholByVolume(mode(), 
         function(abv){
             alcoholByVolume(abv.toFixed(2));
@@ -25,13 +25,12 @@ define([
             alcoholByVolume(null);
         });
     };
-
+    
     var CalculatorViewModel = function(){
         var self = this;
 
         // observables
-        self.originalGravity = originalGravity;
-        self.finalGravity = finalGravity;
+        self.gravity = gravity;
         self.alcoholByVolumeText = alcoholByVolumeText;
         self.modeText = modeText;
 

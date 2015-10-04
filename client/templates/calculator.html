@@ -23,21 +23,22 @@
             </div>
           </div>
         </div>
-        <div class="form-group has-feedback" data-bind="css: {'has-error': originalGravity.hasError, 'has-success': originalGravity.hasSuccess}">
-          <label for="og" class="col-sm-5 control-label">Original gravity</label>
-          <div class="col-sm-5">
-            <input type="text" class="form-control" id="og" placeholder="(e.g. 1050)" data-bind="value: originalGravity , valueUpdate: 'afterkeydown'">
-            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-            <!--<span class="glyphicon glyphicon-remove form-control-feedback" data-bind="css: { 'has-error has-feedback': originalGravity.hasError, 'has-success has-feedback': originalGravity && !originalGravity.hasError}"></span>-->
-            <!--<span class="glyphicon glyphicon-remove form-control-feedback" data-bind="style: { display: originalGravity() ? 'inline' : 'none' }"></span>-->
-            <!--<span class="glyphicon glyphicon-remove form-control-feedback" data-bind='visible: originalGravity.hasError || originalGravity && !originalGravity.hasError'></span>-->
-          </div>
-        </div>
-        <div class="form-group has-success has-feedback">
-          <label for="fg" class="col-sm-5 control-label">Final gravity</label>
-          <div class="col-sm-5">
-            <input type="text" class="form-control" id="fg" placeholder="(e.g. 1010)" data-bind="value: finalGravity">
-            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+        <div data-bind="with: gravity">
+          <div class="form-group has-feedback" data-bind="css: {'has-error': hasErrors}">
+            <div class="form-group has-feedback" data-bind="css: {'has-error': original.hasError, 'has-success': original.hasSuccess}">
+              <label for="og" class="col-sm-5 control-label">Original gravity</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="og" placeholder="(e.g. 1050)" data-bind="value: original , valueUpdate: 'afterkeydown'">
+                <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+              </div>
+            </div>
+            <div class="form-group has-feedback" data-bind="css: {'has-error': final.hasError || hasErrors, 'has-success': final.hasSuccess}">
+              <label for="fg" class="col-sm-5 control-label">Final gravity</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" id="fg" placeholder="(e.g. 1010)" data-bind="value: final, valueUpdate: 'afterkeydown'">
+                <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="form-group">

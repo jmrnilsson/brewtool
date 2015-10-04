@@ -6,11 +6,7 @@ define([
 'use strict';
 
     var query = ko.observable();
-
-    var enabledFilter = ko.computed(function(){
-            var currentQuery = query();
-            return currentQuery !== undefined && currentQuery !== ''; 
-        });
+    var enabledFilter = ko.computed(function(){return query() !== undefined && query() !== ''; });
 
     var filteredEvents = ko.computed(function(){
         var currentQuery = query();

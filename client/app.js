@@ -15,22 +15,17 @@ define([
     ko.components.register('log', { require: 'views/logView' });
   
     // Register extenders
-    ko.extenders.gravity = function(target, overrideMessage) {
-      //add some sub-observables to our observable
+    ko.extenders.gravity = function(target, args) {
       target.hasError = ko.observable();
       target.hasSuccess = ko.observable();
-  
-      function errors(gr){
-          return gr == undefined || isNaN(gr) || gr < 1 || gr > 1.3 && gr < 1000 || gr > 1300
-      };
       
-      function validate(newValue) {
-        var er = errors(newValue)
-          target.hasError(er);
+      function validate(value) {
+        var errors = value == undefined || isNaN(value) || value < 1 || value > 1.3 && value < 1000 || value > 1300;
+          target.hasError(errors);
+          target.hasSuccess(!errors);
       }
       
       validate(target());
-      target.hasSuccess(target() && !target.hasError())
       target.subscribe(validate);
       return target;
     };
