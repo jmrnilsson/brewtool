@@ -13,22 +13,16 @@ define([
         });
         return first ? first.data.temperature : '';
     });
-    var tempText = ko.pureComputed(function(){
-        return temp() ? temp() + ' °C': '';
-    });
-    var lowText = ko.pureComputed(function(){
-        return low() ? low() + ' °C' : '';
-    });
-    var highText = ko.pureComputed(function(){
-        return high() ? high() + ' °C' : '';
-    }); 
+    var tempText = ko.pureComputed(function(){return temp() ? temp() + ' °C': '';});
 
     temp.subscribe(function(){
         var t = temp();
-        if (low() == undefined || low() > t){
+        var l = low();
+        var h = high();
+        if (l == undefined || l > t){
             low(t);
         }
-        if (high() == undefined || high() < t){
+        if (h == undefined || h < t){
             high(t);
         }
     });
@@ -43,8 +37,9 @@ define([
 
         // observables
         self.tempText = tempText;
-        self.lowText = lowText;
-        self.highText  = highText;
+        self.temp = temp;
+        self.low = low;
+        self.high  = high;
         self.alarm = alarm;
 
         // actions
