@@ -17,6 +17,12 @@ define([
   
     // Add routes 
     var Routes = {name: ko.observable('temperature')};
+    var Navbar = {
+      version: bowerPackage.version,
+      temperature: ko.pureComputed(function(){return Routes.name() === 'temperature'? 'active':null;}),
+      calculator: ko.pureComputed(function(){return Routes.name() === 'calculator'? 'active':null;}),
+      log: ko.pureComputed(function(){return Routes.name() === 'log'? 'active':null;}),
+    };
     
     // Register paths
     Path.map("#/temperature").to(function () {Routes.name('temperature');});
@@ -30,8 +36,8 @@ define([
     
     $(function(){
       document.title = bowerPackage.name + " " + bowerPackage.version;
-      document.getElementById('app-version').innerHTML = bowerPackage.version;
       ko.applyBindings(Routes, document.getElementById('content'));
+      ko.applyBindings(Navbar, document.getElementById('bs-navbar-collapse-1'));
     });
   }
 
