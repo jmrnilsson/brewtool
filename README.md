@@ -60,7 +60,9 @@ To start type:
     node daemon.js
 
 ### Additional information about the Arduino setup
-For information on how to include Arduino libraries see http://arduino.cc/en/Guide/Libraries. How to wire or solder the temperature sensor is detailed at http://www.hobbytronics.co.uk/ds18b20-arduino.
+* For information on how to include Arduino libraries see, http://arduino.cc/en/Guide/Libraries. 
+* How to wire or solder the temperature sensor is detailed at http://www.hobbytronics.co.uk/ds18b20-arduino.
+* How to assign the addresses of a 1-Wire temp sensors? Look through the tutorial at http://www.hacktronics.com/Tutorials/arduino-1-wire-address-finder.html
 
 ## Licensing information 
 The software licensed under MIT although dependencies, fonts and media may covered by their respective licenses. 
