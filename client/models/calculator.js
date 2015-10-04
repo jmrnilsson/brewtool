@@ -1,6 +1,6 @@
 define([
     'knockout',
-    'util/abvCalculator',
+    'utils/abvCalculator',
     'toastr',
     'models/events',
     'models/gravity'
