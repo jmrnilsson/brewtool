@@ -11,6 +11,7 @@ Nodejs and Bower is need to install the necessary packages. The following comman
 To get started, clone the repo and type:
 
     git clone https://github.com/jmrnilsson/brewtool.git
+    cd brewtool
     cd client
     bower install
     cd ..
@@ -19,7 +20,8 @@ To get started, clone the repo and type:
 
 That's the setup. To start type the following command (assuming current directory is the root of the repository):
 
-    node .\server\daemonFake.js
+    cd server
+    node daemonFake.js
     
 Nodejs, Express and socket.io should be up and running. You should be able to browse to url indicated by node, usually:
 
@@ -54,7 +56,8 @@ To make sure all packages are installed type in the root of the repository:
 
 To start type:
 
-    node server/daemon.js
+    cd server
+    node daemon.js
 
 ### Additional information about the Arduino setup
 For information on how to include Arduino libraries see http://arduino.cc/en/Guide/Libraries. How to wire or solder the temperature sensor is detailed at http://www.hobbytronics.co.uk/ds18b20-arduino.
