@@ -4,24 +4,28 @@
 A small web application for monitoring brewing temperature when brewing beer or really anything. It also provides a calculator and has a log thingy. It is intended to be used with an Arduino, but does include a fake daemon to "simulate" temperature changes. 
 
 ## Simplified setup (without Arduino sensing)
-To get started clone the repo and go to the  __client__ directory and type:
+Nodejs and Bower is need to install the necessary packages. The following command installs Bower globally,
 
     npm install -g bower
+    
+To get started, clone the repo and type:
+
+    git clone https://github.com/jmrnilsson/brewtool.git
+    cd client
     bower install
-
-Then, go to the  __server__ directory and type: 
-
+    cd ..
+    cd server
     npm install express socket.io
 
-Still in the __server__ directory, type:
+That's the setup. To start type the following command (assuming current directory is the root of the repository):
 
-    node daemonFake.js
-
-That's the setup. Nodejs, Express and socket.io should be up and running. Then you should be able to browse to:
+    node .\server\daemonFake.js
+    
+Nodejs, Express and socket.io should be up and running. You should be able to browse to url indicated by node, usually:
 
     http://localhost:3000/
     
-That's it. Btw, there may be dependencies to python from socket.io. There is a dependency to python 2.7.* from serialport (which is used for the Arduino sensing setup mentioned below).
+That's it. There may be dependencies to Python from socket.io. There is a dependency to Python 2.7.* from serialport (which is used for the Arduino sensing setup mentioned below).
 
 ## Setup with sensing
 ### Prerequisites before actual sensing with Arduino
@@ -54,3 +58,6 @@ To start type:
 
 ### Additional information about the Arduino setup
 For information on how to include Arduino libraries see http://arduino.cc/en/Guide/Libraries. How to wire or solder the temperature sensor is detailed at http://www.hobbytronics.co.uk/ds18b20-arduino.
+
+## Licensing information 
+The software licensed under MIT although dependencies, fonts and media may covered by their respective licenses. 
