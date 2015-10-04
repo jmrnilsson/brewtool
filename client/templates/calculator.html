@@ -9,7 +9,7 @@
       <form class="form-horizontal">
         <div class="form-group">
           <label for="og" class="col-sm-5 control-label">Mode</label>
-          <div class="col-sm-7">
+          <div class="col-sm-5">
             <div class="dropdown">
               <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
                 <span data-bind="text: modeText()"></span>
@@ -23,16 +23,21 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback" data-bind="css: {'has-error': originalGravity.hasError, 'has-success': originalGravity.hasSuccess}">
           <label for="og" class="col-sm-5 control-label">Original gravity</label>
-          <div class="col-sm-7">
-            <input type="text" class="form-control" id="og" placeholder="(e.g. 1050)" data-bind="value: originalGravity">
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="og" placeholder="(e.g. 1050)" data-bind="value: originalGravity , valueUpdate: 'afterkeydown'">
+            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <!--<span class="glyphicon glyphicon-remove form-control-feedback" data-bind="css: { 'has-error has-feedback': originalGravity.hasError, 'has-success has-feedback': originalGravity && !originalGravity.hasError}"></span>-->
+            <!--<span class="glyphicon glyphicon-remove form-control-feedback" data-bind="style: { display: originalGravity() ? 'inline' : 'none' }"></span>-->
+            <!--<span class="glyphicon glyphicon-remove form-control-feedback" data-bind='visible: originalGravity.hasError || originalGravity && !originalGravity.hasError'></span>-->
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-success has-feedback">
           <label for="fg" class="col-sm-5 control-label">Final gravity</label>
-          <div class="col-sm-7">
+          <div class="col-sm-5">
             <input type="text" class="form-control" id="fg" placeholder="(e.g. 1010)" data-bind="value: finalGravity">
+            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
           </div>
         </div>
         <div class="form-group">

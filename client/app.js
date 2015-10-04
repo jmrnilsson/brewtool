@@ -3,10 +3,9 @@ define([
   'path',
   'models/events',
   'jquery',
-  'text!./bower.json'
-], function(ko, Path, events, $, bower){
-
-  var bowerPackage = JSON.parse(bower);
+  'models/routes',
+  'models/navbar'
+], function(ko, Path, events, $, routes, navbar){
 
   function start(){
     
@@ -15,19 +14,31 @@ define([
     ko.components.register('calculator', { require: 'views/calculatorView' });
     ko.components.register('log', { require: 'views/logView' });
   
-    // Add routes 
-    var Routes = {name: ko.observable('temperature')};
-    var Navbar = {
-      version: bowerPackage.version,
-      temperature: ko.pureComputed(function(){return Routes.name() === 'temperature'? 'active':null;}),
-      calculator: ko.pureComputed(function(){return Routes.name() === 'calculator'? 'active':null;}),
-      log: ko.pureComputed(function(){return Routes.name() === 'log'? 'active':null;}),
+    // Register extenders
+    ko.extenders.gravity = function(target, overrideMessage) {
+      //add some sub-observables to our observable
+      target.hasError = ko.observable();
+      target.hasSuccess = ko.observable();
+  
+      function errors(gr){
+          return gr == undefined || isNaN(gr) || gr < 1 || gr > 1.3 && gr < 1000 || gr > 1300
+      };
+      
+      function validate(newValue) {
+        var er = errors(newValue)
+          target.hasError(er);
+      }
+      
+      validate(target());
+      target.hasSuccess(target() && !target.hasError())
+      target.subscribe(validate);
+      return target;
     };
-    
+  
     // Register paths
-    Path.map("#/temperature").to(function () {Routes.name('temperature');});
-    Path.map("#/calculator").to(function () {Routes.name('calculator');});
-    Path.map("#/log").to(function () {Routes.name('log');});
+    Path.map("#/temperature").to(function () {routes.name('temperature');});
+    Path.map("#/calculator").to(function () {routes.name('calculator');});
+    Path.map("#/log").to(function () {routes.name('log');});
     Path.root("#/temperature");
     Path.listen();
     
@@ -35,9 +46,8 @@ define([
     events.attach();
     
     $(function(){
-      document.title = bowerPackage.name + " " + bowerPackage.version;
-      ko.applyBindings(Routes, document.getElementById('content'));
-      ko.applyBindings(Navbar, document.getElementById('bs-navbar-collapse-1'));
+      ko.applyBindings(routes, document.getElementById('content'));
+      ko.applyBindings(navbar, document.getElementById('bs-navbar-collapse-1'));
     });
   }
 

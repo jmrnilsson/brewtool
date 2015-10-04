@@ -5,5 +5,4 @@ define([
 'use strict';
 
 	return {viewModel: viewModel, template: template};	
-
 });

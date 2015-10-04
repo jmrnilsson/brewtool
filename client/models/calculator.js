@@ -6,8 +6,8 @@ define([
 ], function (ko, AbvCalculator, toastr, events) {
 'use strict';
 
-    var originalGravity = ko.observable('1050');
-    var finalGravity = ko.observable('1010');
+    var originalGravity = ko.observable('1050').extend({gravity: "" });
+    var finalGravity = ko.observable('1010').extend({gravity: "" });
     var mode = ko.observable('compensated');
     var modeText = ko.pureComputed(function(){return mode().charAt(0).toUpperCase() + mode().slice(1);});
     var alcoholByVolume = ko.observable();
