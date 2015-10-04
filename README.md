@@ -46,6 +46,11 @@ To make sure all packages are installed type in the root of the repository:
     node daemon.js
     cd ../client
     bower install
+    cd ..
+
+To start type:
+
+    node server/daemon.js
 
 ### Additional information about the Arduino setup
 For information on how to include Arduino libraries see http://arduino.cc/en/Guide/Libraries. How to wire or solder the temperature sensor is detailed at http://www.hobbytronics.co.uk/ds18b20-arduino.
