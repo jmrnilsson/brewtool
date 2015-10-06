@@ -6,7 +6,11 @@ define([
     var original = ko.observable().extend({gravity: null});
     var final = ko.observable().extend({gravity: null});
     var hasError = ko.pureComputed(function(){
-        return original() < final();
+        var og = original();
+        var fg = final();
+        og = og > 1000 ? og / 1000 : og;
+        fg = fg > 1000 ? fg / 1000 : fg;
+        return og < fg;
     });
 
     var Gravity = function(originalGravity, finalGravity){

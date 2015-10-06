@@ -77,20 +77,12 @@ function () {
 		self.simple = simple;
 		self.compensated = compensated;
 		self.plato = plato;
+		
+		var og = originalGravity > 1000 ? originalGravity / 1000 : originalGravity;
+		var fg = finalGravity > 1000 ? finalGravity / 1000 : finalGravity;
         
-		// Convert to decimal if > 1000 
-		if (originalGravity > 1000){
-			originalGravity = originalGravity / 1000;
-			finalGravity = finalGravity / 1000;
-		};
-        
-		self.originalGravity = originalGravity;
-		self.finalGravity = finalGravity;
-     
 		self.alcoholByVolume = function(mode, success, failure){
-			var og = self.originalGravity;
-			var fg = self.finalGravity;
-                
+		        
 		if (!self.validate(failure, og, fg)){
 			return;
 		}   

@@ -26,6 +26,23 @@ define(['utils/abvCalculator'], function(AbvCalculator){
     });
   });
   
+  describe("Given OG and FG is defined as thousands and decimal at the same time", function() {
+        
+    it("Plato should be 6.59 when FG is decimal", function() {
+      var calc = new AbvCalculator(1050, 1.010);
+      var value;
+      calc.alcoholByVolume('plato', function(abv){value = abv}, null);
+      expect(value.toFixed(2)).toEqual('6.59');
+    });
+
+    it("Plato should be 6.59 when OG is decimal", function() {
+      var calc = new AbvCalculator(1.050, 1.010);
+      var value;
+      calc.alcoholByVolume('plato', function(abv){value = abv}, null);
+      expect(value.toFixed(2)).toEqual('6.59');
+    });
+  });
+  
   describe("Given OG 1.080 and FG 1.010", function() {
     var calc;
   
@@ -78,7 +95,7 @@ define(['utils/abvCalculator'], function(AbvCalculator){
     
     it("Original gravity is too high", function() {
       var error;
-      var calc = new AbvCalculator(10000, 1000);
+      var calc = new AbvCalculator(10000, 1001);
       calc.alcoholByVolume('compensated', null, function(abv){error = abv});
       expect(error).toContain('Original gravity is too high');
     });
