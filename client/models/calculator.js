@@ -11,18 +11,27 @@ define([
     var gravity = new Gravity(1050, 1010);
     var mode = ko.observable('compensated');
     var modeText = ko.pureComputed(function(){return mode().charAt(0).toUpperCase() + mode().slice(1);});
-    var alcoholByVolume = ko.observable();
-    var alcoholByVolumeText = ko.pureComputed(function(){ return alcoholByVolume() ?  alcoholByVolume() + ' %' : 'N/A'});
-
+    var alcoholByVolume = ko.observable(null);
+    var alcoholByVolumeText = ko.pureComputed(function(){
+         var abv = alcoholByVolume();
+         if (abv === null){
+             return '';
+         }
+         if (abv === undefined){
+             return 'N/A';
+         }
+         return abv + ' %';
+    });
+    
     function calculate(data, event){
         var model = new Abv(gravity.original(), gravity.final());
-        var r = model.alcoholByVolume(mode());
-        r.then(function(abv){
+        model.alcoholByVolume(mode())
+        .then(function(abv){
             alcoholByVolume(abv.toFixed(2));
             events.emit('calculated-abv', {abv: abv, mode: mode()});
         }).fail(function(error){
             toastr.error(error);
-            alcoholByVolume(null);
+            alcoholByVolume(undefined);
         });
     }
     

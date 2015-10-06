@@ -82,7 +82,6 @@ function (Q) {
 			var og = self.originalGravity;
 			var fg = self.finalGravity;
 	
-			var a = Q;
 			var deferred = Q.defer();
 					
 			self.validate(deferred, og, fg);
