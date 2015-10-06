@@ -3,8 +3,9 @@ define([
     'utils/abvCalculator',
     'toastr',
     'models/events',
-    'models/gravity'
-], function (ko, Abv, toastr, events, Gravity) {
+    'models/gravity',
+    'q'
+], function (ko, Abv, toastr, events, Gravity, Q) {
 'use strict';
 
     var gravity = new Gravity(1050, 1010);
@@ -15,16 +16,15 @@ define([
 
     function calculate(data, event){
         var model = new Abv(gravity.original(), gravity.final());
-        model.alcoholByVolume(mode(), 
-        function(abv){
+        var r = model.alcoholByVolume(mode());
+        r.then(function(abv){
             alcoholByVolume(abv.toFixed(2));
             events.emit('calculated-abv', {abv: abv, mode: mode()});
-        },    
-        function(error){
+        }).fail(function(error){
             toastr.error(error);
             alcoholByVolume(null);
         });
-    };
+    }
     
     var CalculatorViewModel = function(){
         var self = this;

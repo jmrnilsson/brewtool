@@ -1,5 +1,5 @@
-define([], 
-function () {
+define(['q'], 
+function (Q) {
 'use strict';
 
 	// Alcohol by volume formulas
@@ -34,40 +34,31 @@ function () {
 	// Validation
 	/////////////
 	
-	function validateBounds(gravity, gravityType, callback){
+	function validateBounds(gravity, gravityType, deferred){
 		if (gravity == undefined){
-			callback(gravityType + ' gravity is not set');
+			deferred.reject(new Error(gravityType + ' gravity is not set'));
 		}       
 		if (isNaN(gravity)){
-			callback(gravityType + ' gravity is not a number');
+			deferred.reject(new Error(gravityType + ' gravity is not a number'));
 		}        
 		if (gravity < 1){
-			callback(gravityType + ' gravity is too low');
+			deferred.reject(new Error(gravityType + ' gravity is too low'));
 		}           
 		if (gravity > 1.3){
-			callback(gravityType + ' gravity is too high');
+			deferred.reject(new Error(gravityType + ' gravity is too high'));
 		}
 	};
 	
-	function validate(fail, originalGravity, finalGravity){
+	function validate(deferred, originalGravity, finalGravity){
 		var og = originalGravity;
 		var fg = finalGravity;
-		var errors = [];
-			
-		// Intercepted callback
-		var intercepted = function(message){
-			fail(message);
-			errors.push(message);
-		};
-			
-		validateBounds(og, 'Original', intercepted);
-		validateBounds(fg, 'Final', intercepted);
+
+		validateBounds(og, 'Original', deferred);
+		validateBounds(fg, 'Final', deferred);
 			
 		if (fg > og){
-			intercepted('Final gravity is greater than original gravity');
+			deferred.reject(new Error('Final gravity is greater than original gravity'));
 		}
-			
-		return errors.length == 0;
 	}; 
 
 	function AbvCalculator(originalGravity, finalGravity){
@@ -87,21 +78,22 @@ function () {
 		self.originalGravity = originalGravity;
 		self.finalGravity = finalGravity;
      
-		self.alcoholByVolume = function(mode, success, failure){
+		self.alcoholByVolume = function(mode){
 			var og = self.originalGravity;
 			var fg = self.finalGravity;
-                
-		if (!self.validate(failure, og, fg)){
-			return;
-		}   
-		if (!self.hasOwnProperty(mode)){
-			throw 'Calculation mode type not available. Options include simple, compensated, plato'
-		}
-                
-		var result = self[mode].apply(self, [og, fg]);
-			success(result);
+	
+			var a = Q;
+			var deferred = Q.defer();
+					
+			self.validate(deferred, og, fg);
+			if (!self.hasOwnProperty(mode)){
+				throw 'Calculation mode type not available. Options include simple, compensated, plato'
+			}
+					
+			var result = self[mode].apply(self, [og, fg]);
+			deferred.resolve(result);
+			return deferred.promise; 
 		};
-                
 	};
 	return AbvCalculator;
 });

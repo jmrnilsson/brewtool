@@ -7,9 +7,18 @@ define(['utils/abvCalculator'], function(AbvCalculator){
       calc = new AbvCalculator(1050, 1010);
     });
   
+    it("will be detected. It uses the new jasmine async syntax", function(done){
+      calc.alcoholByVolume('compensated').then(function(abv){
+          expect(abv.toFixed(2)).toEqual('5.20');
+      }, function(error){
+          expect(error).toFail();
+      })
+      .always(done);
+    });
+  
     it("Compensated should be 5.20", function() {
       var value;
-      calc.alcoholByVolume('compensated', function(abv){value = abv}, null);
+      calc.alcoholByVolume('compensated').then(function(abv){value = abv});
       expect(value.toFixed(2)).toEqual('5.20');
     });
     

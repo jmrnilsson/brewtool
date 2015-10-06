@@ -5,10 +5,11 @@ require.config({
     text: './bower_components/text/text',
     socketio: './bower_components/socket.io-client/socket.io',
     toastr: './bower_components/toastr/toastr',
-    path: './bower_components/pathjs/path'
+    path: './bower_components/pathjs/path',
+    q: './bower_components/q/q'
   },
   shim: {
-    path: {exports: 'Path'}
+    path: {exports: 'Path'},
   }
 });
 

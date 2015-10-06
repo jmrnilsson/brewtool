@@ -27,6 +27,7 @@
     "pathjs": "*",
     "text": "~2.0.14",
     "jasmine-core": "jasmine#~2.3.4",
-    "socket.io-client": "~1.3.7"
+    "socket.io-client": "~1.3.7",
+    "q": "1.0.1"
   }
 }
