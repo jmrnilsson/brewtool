@@ -15,7 +15,7 @@ define([
   Path.root('#/' + route());
     
   return {
-    name: route,
+    route: route,
     routes: routes,
     version: bowerPackage.version,
     listen: Path.listen

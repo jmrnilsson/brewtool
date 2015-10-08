@@ -2,7 +2,7 @@ define([
   'knockout',
   'models/events',
   'jquery',
-  'models/routes',
+  'models/router',
   'utils/extensions'
 ], function(ko, events, $, router, extensions){
 

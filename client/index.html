@@ -27,9 +27,9 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li data-bind="css: {'active': name() === 'temperature'}"><a href="#/temperature">Temperature</a></li>
-                    <li data-bind="css: {'active': name() === 'calculator'}"><a href="#/calculator">Calculator</a></li>
-                    <li data-bind="css: {'active': name() === 'log'}"><a href="#/log">Log</a></li>
+                    <li data-bind="css: {'active': route() === 'temperature'}"><a href="#/temperature">Temperature</a></li>
+                    <li data-bind="css: {'active': route() === 'calculator'}"><a href="#/calculator">Calculator</a></li>
+                    <li data-bind="css: {'active': route() === 'log'}"><a href="#/log">Log</a></li>
                     <li><a target="spec" href="./spec_runner.html">Specifications</a></li>
                 </ul>
                 <div class="notices pull-right">
@@ -38,7 +38,7 @@
             </div>
         </div>
     </nav>
-    <div id="content" data-bind="component: name"></div>
+    <div id="content" data-bind="component: route"></div>
     <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./bower_components/requirejs/require.js" data-main="./main.js"></script>
