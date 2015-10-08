@@ -24,8 +24,9 @@ define([
 
 	function evaluate(){
 		var temp = sense().data.temperature;
-		var below = low() > temp;
-		var above = high() < temp;
+		// Allow floats as it's quite possible to be super-specific
+		var below = parseFloat(low()) > temp;
+		var above = parseFloat(high()) < temp;
 		var play = played == undefined || (new Date().getTime() - played) > 10000;
 		
 		if (play && on() && (above || below)){
