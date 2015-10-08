@@ -7,7 +7,7 @@ define([
 	var played = null;
 	var low = ko.observable();
 	var high = ko.observable();
-	var active = ko.observable(false);
+	var on = ko.observable(false);
 	
 	var sense = ko.pureComputed(function(){
 		return ko.utils.arrayFirst(events.events(), function(event){
@@ -16,7 +16,7 @@ define([
 	});
 	
 	// Less eager than wrapping evaluate as computed
-	[sense, low, high, active].forEach(function(observable){
+	[sense, low, high, on].forEach(function(observable){
 		observable.subscribe(function(){
 			evaluate(); 
 		})
@@ -28,7 +28,7 @@ define([
 		var above = high() < temp;
 		var play = played == undefined || (new Date().getTime() - played) > 10000;
 		
-		if (play && active() && (above || below)){
+		if (play && on() && (above || below)){
 			var audio = new Audio('./resources/Blop-Mark_DiAngelo-79054334.mp3');
 			audio.play();
 			played = new Date().getTime();
@@ -39,6 +39,6 @@ define([
 	return {
 		low: low,
 		high: high,
-		active: active
+		on: on
 	};
 });
