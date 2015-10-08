@@ -16,13 +16,14 @@ To get started, clone the repo and type:
     bower install
     cd ..
     cd server
-    npm install express socket.io
+    npm install
 
 That's the setup. To start type the following command (assuming current directory is the root of the repository):
 
     cd server
-    node daemonFake.js
-    
+    node fdaemon.js
+
+__Note__: fdaemon is a fake daemon that simulates getting sensing information by randomizing a temperature change of 0, -1, 1 degree C every two seconds   
 Nodejs, Express and socket.io should be up and running. You should be able to browse to url indicated by node, usually:
 
     http://localhost:3000/
@@ -48,7 +49,8 @@ That's it. There may be dependencies to Python from socket.io. There is a depend
 To make sure all packages are installed type in the root of the repository:
 
     cd server
-    npm install express serialport socket.io
+    npm install 
+    npm install serialport
     node daemon.js
     cd ../client
     bower install

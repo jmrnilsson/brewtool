@@ -11,7 +11,7 @@ var express = require('express')
 var configurationPort = 3000;
 
 app.use(express.static('./client/'));
-console.log('Listening on port ' + configurationPort + '.\nPress ctrl + c to close.');
+console.log('Daemon is listening on port ' + configurationPort + '.\nPress ctrl + c to close.');
 server.listen(configurationPort);
 
 // Alternatively new SerialPort("/dev/tty-usbserial1", { baudrate: 9600})

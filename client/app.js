@@ -1,12 +1,10 @@
 define([
   'knockout',
-  'path',
   'models/events',
   'jquery',
   'models/routes',
-  'models/navbar',
   'utils/extensions'
-], function(ko, Path, events, $, routes, navbar, extensions){
+], function(ko, events, $, router, extensions){
 
   function start(){
     
@@ -16,19 +14,15 @@ define([
     ko.components.register('log', { require: 'views/logView' });
     ko.extenders.gravity = extensions.gravity;
   
-    // Register paths
-    Path.map("#/temperature").to(function () {routes.name('temperature');});
-    Path.map("#/calculator").to(function () {routes.name('calculator');});
-    Path.map("#/log").to(function () {routes.name('log');});
-    Path.root("#/temperature");
-    Path.listen();
+    // Listen to paths
+    router.listen();
     
     // Attach listener (this also wires socket.io)
     events.attach();
     
     $(function(){
-      ko.applyBindings(routes, document.getElementById('content'));
-      ko.applyBindings(navbar, document.getElementById('bs-navbar-collapse-1'));
+      ko.applyBindings(router, document.getElementById('content'));
+      ko.applyBindings(router, document.getElementById('bs-navbar-collapse-1'));
     });
   }
 

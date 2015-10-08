@@ -1,0 +1,15 @@
+{
+  "name": "brewtool-daemon",
+  "version": "0.1.0",
+  "description": "A daemon for communication between serial and socket.io",
+  "main": "daemon.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jmrnilsson",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "socket.io": "^1.3.7"
+  }
+}

@@ -1,15 +1,14 @@
+
 var express = require('express')
   , app = module.exports = express()
   , server = require('http').createServer(app)
-  , io = require('socket.io').listen(server)
-  , util = require("util")
-  , repl = require("repl")
-  ;
+  , io = require('socket.io').listen(server);
+  
 var configurationPort = 3000;
  
 app.use(express.static('../client/'));
-console.log('Listening on port ' + configurationPort + '.\nPress ctrl + c to close.');
 server.listen(configurationPort);
+console.log('Fake daemon is listening on port ' + configurationPort + '.\nPress ctrl + c to close.');
 
 var push = function (temperature) {
   setTimeout(function() { 

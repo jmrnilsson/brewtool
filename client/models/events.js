@@ -10,7 +10,9 @@ define([
 	function attach(){
 		socket = io.connect('http://' + location.host);
 		socket.on('sense-temperature', function (event) {
-			emit('sense-temperature', event);
+			setTimeout(function(){
+				emit('sense-temperature', event);				
+			}, 1);
 		});
 	}
 
