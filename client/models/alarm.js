@@ -5,8 +5,8 @@ define([
 'use strict';
 
 	var played = null;
-	var low = ko.observable();
-	var high = ko.observable();
+	var low = ko.observable().extend({float: null});
+	var high = ko.observable().extend({float: null});
 	var on = ko.observable(false);
 	
 	var sense = ko.pureComputed(function(){

@@ -13,6 +13,7 @@ define([
     ko.components.register('calculator', { require: 'views/calculatorView' });
     ko.components.register('log', { require: 'views/logView' });
     ko.extenders.gravity = extensions.gravity;
+    ko.extenders.float = extensions.float;
   
     // Listen to paths
     router.listen();

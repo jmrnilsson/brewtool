@@ -15,7 +15,28 @@ define([
       return target;
     };
   
+  function floatExtension(target, args) {
+      target.hasError = ko.observable();
+      // Currently needs some work in terms of styling and parseFloat will omit some chars.
+      function valid(value){
+        if (value != undefined){
+          if (value != ''){
+            var float = parseFloat(value);
+            return !isNaN(float);
+          }
+        }
+        return true;
+      }
+      function validate(value) {
+        target.hasError(!valid(value));
+      }      
+      validate(target());
+      target.subscribe(validate);
+      return target;
+    };
+  
   return {
-    gravity: gravityExtension
+    gravity: gravityExtension,
+    float: floatExtension
   };
 });

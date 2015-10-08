@@ -36,27 +36,29 @@
     <div class="col-md-4">
       <h2>Alarm</h2>
       <form class="form-horizontal" data-bind="with: alarm">
-        <div class="form-group">
+        <div class="form-group has-feedback" data-bind="css: {'has-error': low.hasError(), 'has-success': !low.hasError()}">
           <label for="alarm0" class="col-sm-4 control-label">Low threshold</label>
-          <div class="input-group col-sm-4" id="alarm0">
-            <input type="text" class="form-control" aria-label="Low bound" placeholder="e.g. 66" data-bind="value: low">
-            <span class="input-group-addon">°C</span>
+          <div class="col-sm-4" >
+            <input type="text" class="form-control" id="alarm0" aria-label="Low bound" placeholder="e.g. 66" data-bind="value: low, valueUpdate: 'afterkeydown'">
+            <span class="glyphicon form-control-feedback" data-bind="css: {'glyphicon-remove': low.hasError(), 'glyphicon-ok': !low.hasError()}"></span>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group has-feedback" data-bind="css: {'has-error': high.hasError(), 'has-success': !high.hasError()}">
           <label for="alarm1" class="col-sm-4 control-label">High threshold</label>
-          <div class="input-group col-sm-4" id="alarm1">
-            <input type="text" class="form-control" aria-label="High bound" placeholder="e.g. 72" data-bind="value: high">
-            <span class="input-group-addon">°C</span>
-          </div>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="alarm1" aria-label="High bound" placeholder="e.g. 72" data-bind="value: high, valueUpdate: 'afterkeydown'">
+            <span class="glyphicon form-control-feedback" data-bind="css: {'glyphicon-remove': high.hasError(), 'glyphicon-ok': !high.hasError()}"></span>
+          </div>  
         </div>
         <div class="form-group">
           <label for="alarm2" class="col-sm-4 control-label">Sound</label>
-          <div class="input-group col-sm-8" id="alarm2">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" aria-label="Active" data-bind="checked: on">
-              </label>
+          <div class="input-group" id="alarm2">
+            <div class="col-sm-8">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" aria-label="Active" data-bind="checked: on">
+                </label>
+              </div>
             </div>
           </div>
         </div>
