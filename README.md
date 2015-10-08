@@ -40,19 +40,20 @@ That's it. There may be dependencies to Python from socket.io. There is a depend
 * Install Python 2.7.x, https://www.python.org/downloads/. This is used by SerialPort during package installation and creates OS-specific packages.
 * Install Arduino Software, IDE https://www.arduino.cc/en/Guide/HomePage
 
-### To start sensing with arduino 
-* Configure  the identity of the temperature sensor OneWire DeviceAddress in the script  __./arduino/arduino_temperature_sensing.ino__
+### Before sensing with arduino 
+* Look at the script in the IC folder. The thermomenter variable needs to be configured to the identity of the temperature sensor. This is the OneWire DeviceAddress. The script is called __./arduino/arduino_temperature_sensing.ino__
 * Connect temperature sensor, USB a.s.o
 * Make sure all the node packages are installed (see below)
 * Browse to http://localhost:3000/
 
-To make sure all packages are installed type in the root of the repository:
+Make sure all packages are installed type in the root of the repository:
 
     cd server
     npm install 
     npm install serialport
     node daemon.js
-    cd ../client
+    cd ..
+    cd client
     bower install
     cd ..
 
