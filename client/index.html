@@ -37,7 +37,7 @@
                     iterating in UI this should be done in before (in vanilla). 
                     -->
                     <!-- ko foreach: routes -->
-                    <li data-bind="css: {'active': $parent.route() === $data}"><a href='#/$data' data-bind="attr: {href: '#/' + $data}, text: $data.charAt(0).toUpperCase() + $data.slice(1);">Temperature</a></li>
+                    <li data-bind="css: {'active': text == $parent.route}"><a href='#' data-bind="attr: {href: href}, text: text">Temperature</a></li>
                     <!-- /ko -->
                     <li><a target="spec" class="header" href="./spec_runner.html">Specifications</a></li>
                 </ul>
