@@ -5,7 +5,8 @@ require.config({
     text: './bower_components/text/text',
     socketio: './bower_components/socket.io-client/socket.io',
     toastr: './bower_components/toastr/toastr',
-    path: './bower_components/pathjs/path'
+    path: './bower_components/pathjs/path',
+    immutable: './bower_components/immutable/dist/immutable'
   },
   shim: {
     path: {exports: 'Path'}
