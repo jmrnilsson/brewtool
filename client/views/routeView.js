@@ -1,8 +1,7 @@
 define([
 	'models/router',
-	'immutable',
 	'jquery'
-], function (router, Immutable, $) {
+], function (router, $) {
 'use strict';
 	
 	// To be replaced with templated string in ES6. Remove jquery and id and inline-style of li-elements,
