@@ -5,6 +5,8 @@ define([
 ], function (router, $, guid) {
 'use strict';
 
+	// Generates all items at once using an immutable list instead of relying on KO foreach which is rather slow 
+	// especially when using containter-less variant.
 	function generateRow(route, i){
 		return '<li data-bind="css: {\'active\': \''+ route +'\' === route()}"><a href="#/' + route + '">' + route.charAt(0).toUpperCase() + route.slice(1) + '</a></li>';
 	}

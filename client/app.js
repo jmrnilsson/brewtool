@@ -30,9 +30,10 @@ define([
     events.attach();
     
     $(function(){
-      routeView.create(router.routes, document.getElementById('navbar'));
+      var navbar = document.getElementById('navbar-collapse');
+      routeView.create(router.routes, navbar.firstElementChild);
       ko.applyBindings(router, document.getElementById('content'));
-      ko.applyBindings(router, document.getElementById('bs-navbar-collapse-1'));
+      ko.applyBindings(router, navbar);
     });
   }
 
