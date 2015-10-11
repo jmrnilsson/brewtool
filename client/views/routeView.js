@@ -3,26 +3,50 @@ define([
 	'jquery'
 ], function (router, $) {
 'use strict';
-	
-	// To be replaced with templated string in ES6. Remove jquery and id and inline-style of li-elements,
-	// index in row-function and jquery when cleaning up jquery from this.
-	
-	function row(route, i){
-		return '<li style="display:none;" id="navitem'+i+'" data-bind="css: {\'active\': \''+ route +'\' === route()}"><a href="#/' + route + '">' + route.charAt(0).toUpperCase() + route.slice(1) + '</a></li>';
+
+	function generateRow(route, i){
+		return '<li data-bind="css: {\'active\': \''+ route +'\' === \'route()}\'"><a href="#/' + route + '">' + route.charAt(0).toUpperCase() + route.slice(1) + '</a></li>';
 	}
-	
-	function generate(routes, parentElement){
+
+	function generate(routes){
 		var html = '';
 		routes.forEach(function(route, index, all){
-			html += row(all.get(index), index);
+			html += generateRow(all.get(index), index);
 		})
-		html += '<li id="navitem3" style="display:none;"><a target="spec" class="header" href="./spec_runner.html">Specifications</a></li>';
-		parentElement.innerHTML = html;	
-
-		$('#navitem'+0).fadeIn(200);
-		$('#navitem'+1).fadeIn(300);	
-		$('#navitem'+2).fadeIn(400);	
-		$('#navitem'+3).fadeIn(500);
+		html += '<li><a target="spec" class="header" href="./spec_runner.html">Specifications</a></li>';
+		return html;
 	}
-	return {create: generate};	
+
+	function guid() {
+		function seed() {
+			return Math.floor((1 + Math.random()) * 0x10000)
+			.toString(16)
+			.substring(1);
+		}
+		return seed() + seed() + '-' + seed() + '-' + seed() + '-' + seed() + '-' + seed() + seed() + seed();
+	}
+
+	// Keeping jquery fadeIn seperate from template creations
+	function fadeIn(html, parentElement){
+		var identities = [];
+		$(html).each(function(index, row){
+			var id = guid();
+			row.style.display = 'none';
+			row.id = id;
+			identities.push(id);
+			$(parentElement).append(row);
+		});
+
+		var delay = 100;
+		identities.forEach(function(id){
+			delay += 100;
+			$('#'+id).fadeIn(delay);
+		});
+	}
+	
+	function create(routes, parentElement){
+		fadeIn(generate(routes), parentElement);
+	}
+	
+	return {create: create};	
 });
