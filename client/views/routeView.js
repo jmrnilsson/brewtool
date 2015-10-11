@@ -5,7 +5,7 @@ define([
 'use strict';
 
 	function generateRow(route, i){
-		return '<li data-bind="css: {\'active\': \''+ route +'\' === \'route()}\'"><a href="#/' + route + '">' + route.charAt(0).toUpperCase() + route.slice(1) + '</a></li>';
+		return '<li data-bind="css: {\'active\': \''+ route +'\' === route()}"><a href="#/' + route + '">' + route.charAt(0).toUpperCase() + route.slice(1) + '</a></li>';
 	}
 
 	function generate(routes){
@@ -17,16 +17,7 @@ define([
 		return html;
 	}
 
-	function guid() {
-		function seed() {
-			return Math.floor((1 + Math.random()) * 0x10000)
-			.toString(16)
-			.substring(1);
-		}
-		return seed() + seed() + '-' + seed() + '-' + seed() + '-' + seed() + '-' + seed() + seed() + seed();
-	}
-
-	// Keeping jquery fadeIn seperate from template creations
+	// Seperate plumbing for jquery fade in. All the 'default' templating is done above. 
 	function fadeIn(html, parentElement){
 		var identities = [];
 		$(html).each(function(index, row){
@@ -39,10 +30,23 @@ define([
 
 		var delay = 100;
 		identities.forEach(function(id){
-			delay += 100;
-			$('#'+id).fadeIn(delay);
+			var el = $('#'+id);
+			el.fadeIn(delay += 100, function(){
+				// Clean up temporary id's once fade is completed
+				el.removeAttr('id');
+			});
 		});
 	}
+	
+	function guid() {
+		function seed() {
+			return Math.floor((1 + Math.random()) * 0x10000)
+			.toString(16)
+			.substring(1);
+		}
+		return seed() + seed() + '-' + seed() + '-' + seed() + '-' + seed() + '-' + seed() + seed() + seed();
+	}
+
 	
 	function create(routes, parentElement){
 		fadeIn(generate(routes), parentElement);
