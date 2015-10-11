@@ -1,7 +1,8 @@
 define([
 	'models/router',
-	'jquery'
-], function (router, $) {
+	'jquery',
+	'utils/guid'
+], function (router, $, guid) {
 'use strict';
 
 	function generateRow(route, i){
@@ -21,7 +22,7 @@ define([
 	function fadeIn(html, parentElement){
 		var identities = [];
 		$(html).each(function(index, row){
-			var id = guid();
+			var id = guid.newGuid();
 			row.style.display = 'none';
 			row.id = id;
 			identities.push(id);
@@ -37,16 +38,6 @@ define([
 			});
 		});
 	}
-	
-	function guid() {
-		function seed() {
-			return Math.floor((1 + Math.random()) * 0x10000)
-			.toString(16)
-			.substring(1);
-		}
-		return seed() + seed() + '-' + seed() + '-' + seed() + '-' + seed() + '-' + seed() + seed() + seed();
-	}
-
 	
 	function create(routes, parentElement){
 		fadeIn(generate(routes), parentElement);

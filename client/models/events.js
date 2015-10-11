@@ -9,25 +9,25 @@ define([
 
 	function attach(){
 		socket = io.connect('http://' + location.host);
-		socket.on('sense-temperature', function (event) {
-			setTimeout(function(){
-				emit('sense-temperature', event);				
-			}, 1);
-		});
+		socket.on('sense-temperature', function (event) {emit('sense-temperature', event);});
 	}
 
 	function emit(topic, data){		
 		if (topic == undefined){
             throw "Event is missing a topic";
         }
-		events.unshift({
-			topic: topic, 
-			created: new Date().toUTCString(),
-			data: data
-		});
-		if(events().length > 10000){
-			events.pop();
-		}
+		
+		setTimeout(function(){
+				events.unshift({
+					topic: topic, 
+					created: new Date().toUTCString(),
+					data: data
+				});
+				if(events().length > 10000){
+					events.pop();
+				}
+			}, 1);
+		
 	}
 
 	return {
