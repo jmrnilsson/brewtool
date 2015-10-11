@@ -17,22 +17,9 @@ define([
   
   function floatExtension(target, args) {
       target.hasError = ko.observable();
-      // Currently needs some work in terms of styling and parseFloat will omit some chars.
-      function valid(value){
-        if (value == undefined){
-          return true;
-        }
-        return (value.match(/^-?\d*(\.\d+)?$/));
-        // if (value != undefined){
-        //   if (value != ''){
-        //     var float = parseFloat(value);
-        //     return !isNaN(float);
-        //   }
-        // }
-        // return true;
-      }
+ 
       function validate(value) {
-        target.hasError(!valid(value));
+        target.hasError(value != undefined && !(value.match(/^-?\d*(\.\d+)?$/)));
       }      
       validate(target());
       target.subscribe(validate);
