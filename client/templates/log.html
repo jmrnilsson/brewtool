@@ -17,14 +17,18 @@
           <thead>
               <tr>
                 <th class="col-sm-2">Name</th>
-                <th class="col-sm-3">Date and time</th> 
-                <th class="col-sm-7">Data</th>       
+                <th class="col-sm-1">Time</th> 
+                <th class="col-sm-1">Session</th> 
+                <th class="col-sm-1">Id</th> 
+                <th class="col-sm-7">Data</th>
               </tr>       
           </thead>
           <tbody data-bind="foreach: filteredEvents">
               <tr>
                 <td data-bind="text: topic"></td>
                 <td data-bind="text: created"></td>
+                <td data-bind="text: session"></td>
+                <td data-bind="text: id"></td>
                 <td data-bind="text: JSON.stringify(data).substring(0, 80);"></td>
               </tr>
           </tbody>
