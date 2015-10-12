@@ -15,7 +15,7 @@ define([
     var bower = JSON.parse(bowerConfiguration);
     var defaultRoute = 'temperature';
     var routes = Immutable.List.of(defaultRoute, 'calculator', 'log');
-    var route = {route: ko.observable(defaultRoute)};
+    var model = {route: ko.observable(defaultRoute)};
       
     // Register ko
     ko.components.register('temperature', { require: 'views/temperatureView' });
@@ -27,7 +27,7 @@ define([
   
     // Listen to paths   
     routes.forEach(function(r, index, all){
-      Path.map('#/' + all.get(index)).to(function () {route.route(all.get(index));});
+      Path.map('#/' + all.get(index)).to(function () {model.route(all.get(index));});
     });
     Path.root('#/' + routes.get(0));
     Path.listen();
@@ -39,7 +39,7 @@ define([
       var navbar = document.getElementById('navbar-collapse');
       document.getElementsByClassName('navbar-text')[0].innerHTML = bower.version;
       routeView.create(routes, navbar.firstElementChild);
-      ko.applyBindings(route, document.getElementById('content'));
+      ko.applyBindings(model, document.body);
     });
   }
 
