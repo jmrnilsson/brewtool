@@ -11,28 +11,29 @@ define([
 		socket = io.connect('http://' + location.host);
 		socket.on('sense-temperature', function (event) {emit('sense-temperature', event);});
 	}
-
+	
 	function emit(topic, data){		
 		if (topic == undefined){
             throw "Event is missing a topic";
         }
 		
-		setTimeout(function(){
-				events.unshift({
-					topic: topic, 
-					created: new Date().toUTCString(),
-					data: data
-				});
-				if(events().length > 10000){
-					events.pop();
-				}
-			}, 1);
-		
+		events.unshift({
+			topic: topic, 
+			created: new Date().toUTCString(),
+			data: data
+		});
+		if(events().length > 10000){
+			events.pop();
+		}
+	}
+	
+	function emitAsync(topic, data){
+		setTimeout(emit(topic, data), 0);
 	}
 
 	return {
 		events: events, 
-		emit: emit, 
+		emit: emitAsync, 
 		attach: attach
 	};		
 });
