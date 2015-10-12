@@ -1,14 +1,14 @@
 define([
     'knockout',
     'toastr',
-    'models/events'
+    'utils/framework'
 ], function (ko, toastr, e) {
 'use strict';
 
     var query = ko.observable();
-    var enabledFilter = ko.computed(function(){return query() !== undefined && query() !== ''; });
+    var enabledFilter = ko.pureComputed(function(){return query() !== undefined && query() !== ''; });
 
-    var filteredEvents = ko.computed(function(){
+    var filteredEvents = ko.pureComputed(function(){
         var currentQuery = query();
         if (currentQuery == undefined || currentQuery == ''){
             return e.events().slice(0, 250);

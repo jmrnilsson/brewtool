@@ -2,7 +2,7 @@ define([
     'knockout',
     'utils/abvCalculator',
     'toastr',
-    'models/events',
+    'utils/framework',
     'models/gravity'
 ], function (ko, Abv, toastr, events, Gravity) {
 'use strict';

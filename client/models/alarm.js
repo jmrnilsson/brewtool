@@ -1,6 +1,6 @@
 define([
    'knockout',
-   'models/events'
+   'utils/framework'
 ], function (ko, events) {
 'use strict';
 

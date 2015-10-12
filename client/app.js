@@ -1,27 +1,33 @@
 define([
   'knockout',
-  'models/events',
+  'utils/framework',
   'jquery',
-  'models/router',
   'utils/extensions',
   'views/routeView',
-  'path'
-], function(ko, events, $, router, extensions, routeView, Path){
+  'path',
+  'immutable',
+  'text!./bower.json'
+], function(ko, events, $, extensions, routeView, Path, Immutable, bowerConfiguration){
 
   function start(){
     
-    var routes = router.routes;
-    
+    // Declare routes and read configuration
+    var bower = JSON.parse(bowerConfiguration);
+    var defaultRoute = 'temperature';
+    var routes = Immutable.List.of(defaultRoute, 'calculator', 'log');
+    var route = {route: ko.observable(defaultRoute)};
+      
     // Register ko
     ko.components.register('temperature', { require: 'views/temperatureView' });
     ko.components.register('calculator', { require: 'views/calculatorView' });
     ko.components.register('log', { require: 'views/logView' });
+    ko.components.register('chart', { require: 'views/chartView' });
     ko.extenders.gravity = extensions.gravity;
     ko.extenders.float = extensions.float;
   
     // Listen to paths   
-    routes.forEach(function(route, index, routeList){
-      Path.map('#/' + routeList.get(index)).to(function () {router.route(routeList.get(index));});
+    routes.forEach(function(r, index, all){
+      Path.map('#/' + all.get(index)).to(function () {route.route(all.get(index));});
     });
     Path.root('#/' + routes.get(0));
     Path.listen();
@@ -31,9 +37,9 @@ define([
     
     $(function(){
       var navbar = document.getElementById('navbar-collapse');
-      routeView.create(router.routes, navbar.firstElementChild);
-      ko.applyBindings(router, document.getElementById('content'));
-      ko.applyBindings(router, navbar);
+      document.getElementsByClassName('navbar-text')[0].innerHTML = bower.version;
+      routeView.create(routes, navbar.firstElementChild);
+      ko.applyBindings(route, document.getElementById('content'));
     });
   }
 

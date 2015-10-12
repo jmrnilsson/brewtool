@@ -1,5 +1,5 @@
 define([
-	'models/router',
+  	'utils/framework',
 	'jquery',
 	'utils/guid'
 ], function (router, $, guid) {
