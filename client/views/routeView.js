@@ -6,34 +6,39 @@ define([
 'use strict';
 
 	function generateRow(route, i, fadeInDelay){
-    var capitalizedRoute =  route.charAt(0).toUpperCase() + route.slice(1);
-    return '<li class="js-fade is-paused fade-in-'+fadeInDelay+'" data-bind="css: {\'active\': \''+ route +'\' === route()}"><a href="#/' + route + '" >' + capitalizedRoute + '</a></li>';
+		var capitalizedRoute =  route.charAt(0).toUpperCase() + route.slice(1);
+		return '<li class="js-fade is-paused fade-in-'+fadeInDelay+'" data-bind="css: {\'active\': \''+ route +'\' === route()}"><a href="#/' + route + '" >' + capitalizedRoute + '</a></li>';
 	}
 
 	function generate(routes, parentElement){
 		var html = '';
-    var fadeInDelay = 100;
+    	var fadeInDelay = 100;
+    	var delayMax = 500;
 		routes.forEach(function(route, index, all){
 			html += generateRow(all.get(index), index, fadeInDelay += 100);
-		})
-    fadeInDelay += 100;
+		});
+    	fadeInDelay < delayMax ? fadeInDelay += 100 : delayMax;
 		html += '<li><a class="js-fade is-paused fade-in-'+ fadeInDelay +'" target="spec" class="header" href="./spec_runner.html">Specifications</a></li>';
-    parentElement.innerHTML = html;
+    	parentElement.innerHTML = html;
 
-    // animation start
-    var elements = parentElement.getElementsByClassName('js-fade');
-    for (var i = 0; i < elements.length; i++) {
-      var el = elements[i];
-      if (el.classList.contains('is-paused')){
-        el.classList.remove('is-paused');
-      }
-    }
+    	// animation start
+		var elements = parentElement.getElementsByClassName('js-fade');
+		for (var i = 0; i < elements.length; i++) {
+			var el = elements[i];
+			if (el.classList.contains('is-paused')){
+					el.classList.remove('is-paused');
+			
+			setTimeout(function(){
+				el.className = '';
+			}, delayMax);
+		}
 	}
+}
 
 	// Seperate plumbing for jquery fade in. All the 'default' templating is done above.
   /*
 	function fadeIn(html, parentElement){
-		var identities = [];
+	var identities = [];
     var parser = new DOMParser();
     var dom = parser.parseFromString(html,"text/xml");
     var child = html.firstChild;
