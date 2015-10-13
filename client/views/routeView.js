@@ -1,28 +1,42 @@
 define([
-  	'utils/framework',
+  'utils/framework',
 	'jquery',
 	'utils/guid'
 ], function (router, $, guid) {
 'use strict';
 
-	// Generates all items at once using an immutable list instead of relying on KO foreach which is rather slow 
-	// especially when using containter-less variant.
-	function generateRow(route, i){
-		return '<li data-bind="css: {\'active\': \''+ route +'\' === route()}"><a href="#/' + route + '">' + route.charAt(0).toUpperCase() + route.slice(1) + '</a></li>';
+	function generateRow(route, i, fadeInDelay){
+    var capitalizedRoute =  route.charAt(0).toUpperCase() + route.slice(1);
+    return '<li class="js-fade is-paused fade-in-'+fadeInDelay+'" data-bind="css: {\'active\': \''+ route +'\' === route()}"><a href="#/' + route + '" >' + capitalizedRoute + '</a></li>';
 	}
 
-	function generate(routes){
+	function generate(routes, parentElement){
 		var html = '';
+    var fadeInDelay = 100;
 		routes.forEach(function(route, index, all){
-			html += generateRow(all.get(index), index);
+			html += generateRow(all.get(index), index, fadeInDelay += 100);
 		})
-		html += '<li><a target="spec" class="header" href="./spec_runner.html">Specifications</a></li>';
-		return html;
+    fadeInDelay += 100;
+		html += '<li><a class="js-fade is-paused fade-in-'+ fadeInDelay +'" target="spec" class="header" href="./spec_runner.html">Specifications</a></li>';
+    parentElement.innerHTML = html;
+
+    // animation start
+    var elements = parentElement.getElementsByClassName('js-fade');
+    for (var i = 0; i < elements.length; i++) {
+      var el = elements[i];
+      if (el.classList.contains('is-paused')){
+        el.classList.remove('is-paused');
+      }
+    }
 	}
 
-	// Seperate plumbing for jquery fade in. All the 'default' templating is done above. 
+	// Seperate plumbing for jquery fade in. All the 'default' templating is done above.
+  /*
 	function fadeIn(html, parentElement){
 		var identities = [];
+    var parser = new DOMParser();
+    var dom = parser.parseFromString(html,"text/xml");
+    var child = html.firstChild;
 		$(html).each(function(index, row){
 			var id = guid.newGuid();
 			row.style.display = 'none';
@@ -40,10 +54,10 @@ define([
 			});
 		});
 	}
-	
+  */
+
 	function create(routes, parentElement){
-		fadeIn(generate(routes), parentElement);
+		generate(routes, parentElement);
 	}
-	
-	return {create: create};	
+	return {create: create};
 });
