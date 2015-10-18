@@ -33,9 +33,7 @@ function () {
 
 	// Validation
 	/////////////
-	function validate(originalGravity, finalGravity){
-		var og = originalGravity;
-		var fg = finalGravity;
+	function validate(originalGravity, finalGravity, mode){
 		var errors = [];
 
 		function validateBounds(gravity, gravityType){
@@ -53,11 +51,15 @@ function () {
 			}
 		};
 
-		validateBounds(og, 'Original');
-		validateBounds(fg, 'Final');
+		validateBounds(originalGravity, 'Original');
+		validateBounds(finalGravity, 'Final');
 
-		if (fg > og){
+		if (finalGravity > originalGravity){
 			errors.push('Final gravity is greater than original gravity');
+		}
+
+		if (mode != 'simple' && mode != 'compensated' && mode != 'plato'){
+			errors.push('Calculation mode type not available. Options include simple, compensated, plato');
 		}
 
 		return errors;
@@ -71,7 +73,7 @@ function () {
 		var og = toDecimal(originalGravity);
 		var fg = toDecimal(finalGravity);
 
-		var errors = validate(og, fg);
+		var errors = validate(og, fg, mode);
 
 		if (errors.length > 0){
 			throw new Error(errors[0]);
@@ -81,7 +83,6 @@ function () {
 			case 'simple': return new Abv(simple(og, fg));
 			case 'compensated': return new Abv(compensated(og, fg));
 			case 'plato': return new Abv(plato(og, fg));
-			default: throw new Error('Calculation mode type not available. Options include simple, compensated, plato');
 		}
 	};
 

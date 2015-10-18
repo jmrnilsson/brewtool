@@ -69,6 +69,12 @@ define(['utils/abvCalculator'], function(Abv){
       expect(function(){Abv.getAbv('xo', .1, 'a');}).toThrow(new Error('Original gravity is too low'));
     });
 
+    it("Original gravity error throws first", function() {
+      var errs = Abv.getErrors('xo', .1, 'a');
+      console.log(errs);
+      expect(errs.length).toBeGreaterThan(2);
+    });
+
     it("Should request a mode of calculation", function() {
       expect(function(){Abv.getAbv('xo', 1050, 1010);}).toThrow(new Error('Calculation mode type not available. Options include simple, compensated, plato'));
     });

@@ -17,7 +17,7 @@ define([
         var fg = gravity.final();
         try {
             var result = Abv.getAbv(mode(), og, fg);
-            abv(format(result.toFixed(2)));
+            abv(format(result.text));
 
             // Only publish if user initiated calculation
             if (arguments.length > 0){
