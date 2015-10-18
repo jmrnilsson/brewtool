@@ -13,30 +13,28 @@ define([
     var abv = ko.observable();
 
     function calculate(data, event){
-        var onclick = arguments.length > 1;
-        var model = new Abv(gravity.original(), gravity.final());
-        model.alcoholByVolume(mode(), success(onclick), fail);
+        var og = gravity.original();
+        var fg = gravity.final();
+        try {
+            var result = Abv.getAbv(mode(), og, fg);
+            abv(format(result.toFixed(2)));
+
+            // Only publish if user initiated calculation
+            if (arguments.length > 0){
+                events.emit('calculated-abv', {abv: result, mode: mode()});
+            }
+        }
+        catch(error){
+            abv(format(null));
+            var errors = Abv.getErrors(og, fg);
+            errors.forEach(function(error){
+                toastr.error(error);
+            })
+        }
     };
 
     function format(alcoholByVolume){
         return alcoholByVolume ? alcoholByVolume + ' %' : 'N/A';
-    }
-
-    function fail(failure){
-        abv(format(null));
-        failure.errors.forEach(function(error){
-            toastr.error(error);
-        });
-    }
-
-    function success(onclick){
-        function setAbv(alcoholByVolume){
-            abv(format(alcoholByVolume.toFixed(2)));
-            if (onclick) {
-                events.emit('calculated-abv', {abv: alcoholByVolume, mode: mode()});
-            }
-        }
-        return setAbv;
     }
 
     var CalculatorViewModel = function(){
