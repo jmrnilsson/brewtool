@@ -20,13 +20,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand logo" href="#/temperature">
+                <a class="navbar-brand logo" href="/">
                     <i class="fa fa-beer"></i>
                     Brew Tools
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul class="nav navbar-nav"></ul>
+                <ul class="nav navbar-nav">
+                    <li data-bind="css: {'active': 'temperature' === route()}"><a href="#/temperature" >Temperature</a></li>
+                    <li data-bind="css: {'active': 'calculator' === route()}"><a href="#/calculator" >Calculator</a></li>
+                    <li data-bind="css: {'active': 'log' === route()}"><a href="#/log" >Log</a></li>
+                    <li><a target="spec" class="header" href="./spec_runner.html">Specifications</a></li>
+                </ul>
                 <div class="notices pull-right">
                     <p class="navbar-text"></p>
                 </div>
