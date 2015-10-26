@@ -1,7 +1,7 @@
 define([
     'knockout',
     'toastr',
-    'utils/framework'
+    'utils/events'
 ], function (ko, toastr, e) {
 'use strict';
 
@@ -21,6 +21,6 @@ define([
         var self = this;
         self.temperatures = temperatures;
     }
-    
+
     return LogViewModel;
 });

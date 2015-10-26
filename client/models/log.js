@@ -1,7 +1,7 @@
 define([
     'knockout',
     'toastr',
-    'utils/framework'
+   'utils/events'
 ], function (ko, toastr, e) {
 'use strict';
 
@@ -18,7 +18,7 @@ define([
                 return ev.topic.indexOf(currentQuery) > -1;
             });
         }
-    }); 
+    });
 
     function LogViewModel(){
         var self = this;
@@ -26,6 +26,6 @@ define([
         self.query = query;
         self.enabledFilter = enabledFilter;
     }
-    
+
     return LogViewModel;
 });

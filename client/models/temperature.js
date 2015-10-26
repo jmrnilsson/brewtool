@@ -1,10 +1,10 @@
 define([
     'knockout',
-    'utils/framework',
+    'utils/events',
     'models/alarm'
 ], function (ko, events, alarm) {
 'use strict';
-    
+
     var low = ko.observable();
     var high = ko.observable();
     var temp = ko.pureComputed(function(){

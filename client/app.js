@@ -1,36 +1,14 @@
 define([
   'knockout',
-  'utils/framework',
+  'utils/events',
   'jquery',
   'utils/extensions',
   'path',
   'immutable',
-  'text!./bower.json',
-  'utils/guid'
-], function(ko, events, $, extensions, Path, Immutable, bowerConfiguration, guid){
-
-  function fadeIn(html, parentElement){
-    var identities = [];
-    $(html).each(function(index, row){
-            var id = guid.newGuid();
-            row.style.display = 'none';
-            row.id = id;
-            identities.push(id);
-            $(parentElement).append(row);
-    });
-
-    var delay = 100;
-    identities.forEach(function(id){
-      var el = $('#'+id);
-      el.fadeIn(delay += 100, function(){
-        // Clean up temporary id's once fade is completed
-        el.removeAttr('id');
-      });
-    });
-  }
+  'text!./bower.json'
+], function(ko, events, $, extensions, Path, Immutable, bowerConfiguration){
 
   function start(){
-
     // Declare routes and read configuration
     var bower = JSON.parse(bowerConfiguration);
     var routes = Immutable.List.of('temperature', 'calculator', 'log');
