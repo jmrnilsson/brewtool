@@ -7,4 +7,5 @@ function newGuid() {
   return seed() + seed() + '-' + seed() + '-' + seed() + '-' + seed() + '-' + seed() + seed() + seed();
 }
 
-exports.utils = {guid: {'new': newGuid}};
+exports.guid = {'new': newGuid};
+exports.noop = function(){};

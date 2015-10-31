@@ -32,10 +32,8 @@ function addSense(data){
   stmt.finalize();
 }
 
-function noop(){}
-
 exports.init = init;
-exports.close = db ? db.close() : noop;
+//exports.close = db ? db.close() : utils.noop;
 exports.gravities = {
   'add': addGravity
 };

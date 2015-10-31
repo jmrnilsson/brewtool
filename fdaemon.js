@@ -5,13 +5,12 @@ var express = require('express')
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server)
   , db = require('./db.js')
-  , utils = require('./utils.js').utils
+  , utils = require('./utils.js')
   , moment = require('moment');
 
 db.init();
 var port = 3000;
 var session = utils.guid.new();
-var Memento = utils.Memento;
 
 app.use(express.static('./client/'));
 server.listen(port);
