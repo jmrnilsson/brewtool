@@ -1,36 +1,29 @@
+'use strict';
 
 var express = require('express')
   , app = module.exports = express()
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server)
-  , db = require('./db.js');
+  , db = require('./db.js')
+  , utils = require('./utils.js').utils;
 
 db.init();
-var configurationPort = 3000;
-var session = newGuid();
+var port = 3000;
+var session = utils.guid.new();
+var Memento = utils.Memento;
 
 app.use(express.static('./client/'));
-server.listen(configurationPort);
-console.log('Fake daemon is listening on port ' + configurationPort + '.\nPress ctrl + c to close.');
+server.listen(port);
+console.log('Fake daemon is listening on port ' + port + '.');
+console.log('Press ctrl + c to close.');
 
 var push = function (temperature) {
   setTimeout(function() {
-    var sense = {session: session, timestamp: new Date().toUTCString(), celsius: temperature}
-    //   stmt.run(data.session, data.timestamp, data.celsius);
+    var sense = new Memento({celsius: temperature})
     db.senses.add(sense);
-    //io.sockets.emit('sense-temperature', sense);
-    io.sockets.emit('sense-temperature', {temperature: temperature, utc: new Date().toUTCString()});
+    io.sockets.emit('sense-temperature', sense);
     push(Math.floor(Math.random() * 3) - 1 + temperature);
   }, 2000);
-}
-
-function newGuid() {
-  function seed() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-    .toString(16)
-    .substring(1);
-  }
-  return seed() + seed() + '-' + seed() + '-' + seed() + '-' + seed() + '-' + seed() + seed() + seed();
 }
 
 // var sqlite3 = require('sqlite3').verbose();

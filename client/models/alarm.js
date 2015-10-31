@@ -23,7 +23,7 @@ define([
 	})
 
 	function evaluate(){
-		var temp = sense().data.temperature;
+		var temp = sense().data.celsius;
 		// Allow floats as it's quite possible to be super-specific
 		var below = parseFloat(low()) > temp;
 		var above = parseFloat(high()) < temp;

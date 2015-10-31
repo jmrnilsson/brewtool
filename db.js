@@ -1,8 +1,11 @@
+'use strict';
+
 var sqlite3 = require('sqlite3').verbose();
 var fs = require("fs");
 var file = "log.db";
 var db;
-
+var moment = require('moment');
+var utils = require('./utils.js');
 
 function init(){
   if(!fs.existsSync(file))
@@ -19,7 +22,7 @@ function init(){
 
 function addGravity(data){
   var stmt = db.prepare('INSERT INTO tGravity VALUES (?, ?, ?, ?)');
-  stmt.run(data.session, data.timestamp, data.originalGravity, data.finalGravity);
+  stmt.run( data.timestamp, data.originalGravity, data.finalGravity);
   stmt.finalize();
 }
 
@@ -30,6 +33,7 @@ function addSense(data){
 }
 
 function noop(){}
+
 exports.init = init;
 exports.close = db ? db.close() : noop;
 exports.gravities = {

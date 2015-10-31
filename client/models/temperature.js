@@ -11,7 +11,7 @@ define([
         var first = ko.utils.arrayFirst(events.events(), function(event){
             return event.topic === 'sense-temperature';
         });
-        return first ? first.data.temperature : '';
+        return first ? first.data.celsius : '';
     });
     var tempText = ko.pureComputed(function(){return temp() ? temp() + ' °C': '';});
 
