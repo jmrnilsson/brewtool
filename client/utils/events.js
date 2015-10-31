@@ -1,7 +1,8 @@
 define([
 	'socketio',
-	'knockout'
-], function (io, ko, guid) {
+	'knockout',
+	'jquery'
+], function (io, ko, $) {
 'use strict';
 
 	var session = newGuid();
@@ -19,9 +20,12 @@ define([
 				throw new Error("Event is missing a topic");
 			}
 
-			// Replay to server
 			if (topic === 'calculated-abv'){
 				socket.emit(topic, data);
+			}
+
+			if (topic === 'reset-session'){
+				socket.emit(topic, {});
 			}
 
 			events.unshift({

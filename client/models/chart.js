@@ -11,12 +11,6 @@ define([
 		});
     });
 
-    var groupedTemperatures = ko.pureComputed(function(){
-		return ko.utils.arrayFilter(e.events(), function(ev){
-			return ev.topic.indexOf('sense-temperature') > -1;
-		});
-    });
-
     function LogViewModel(){
         var self = this;
         self.temperatures = temperatures;

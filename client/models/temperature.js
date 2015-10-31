@@ -30,6 +30,7 @@ define([
     function clear(){
         low(null);
         high(null);
+        events.emit('reset-session', null);
     };
 
     var TemperatureViewModel = function(){

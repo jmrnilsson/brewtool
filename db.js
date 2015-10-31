@@ -22,7 +22,7 @@ function init(){
 
 function addGravity(data){
   var stmt = db.prepare('INSERT INTO tGravity VALUES (?, ?, ?, ?)');
-  stmt.run( data.timestamp, data.originalGravity, data.finalGravity);
+  stmt.run(data.session, data.timestamp, data.originalGravity, data.finalGravity);
   stmt.finalize();
 }
 
@@ -38,9 +38,7 @@ exports.init = init;
 exports.close = db ? db.close() : noop;
 exports.gravities = {
   'add': addGravity
-  //,'get': getGravity
 };
 exports.senses = {
   'add': addSense
-  //,'get': getSense
 };
