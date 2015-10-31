@@ -5,7 +5,8 @@ var express = require('express')
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server)
   , db = require('./db.js')
-  , utils = require('./utils.js').utils;
+  , utils = require('./utils.js').utils
+  , moment = require('moment');
 
 db.init();
 var port = 3000;
@@ -19,7 +20,7 @@ console.log('Press ctrl + c to close.');
 
 var push = function (temperature) {
   setTimeout(function() {
-    var sense = new Memento({celsius: temperature})
+    var sense = {session: session, timestamp: moment.utc().valueOf(), celsius: temperature}
     db.senses.add(sense);
     io.sockets.emit('sense-temperature', sense);
     push(Math.floor(Math.random() * 3) - 1 + temperature);
