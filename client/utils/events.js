@@ -19,6 +19,11 @@ define([
 				throw new Error("Event is missing a topic");
 			}
 
+			// Replay to server
+			if (topic === 'calculated-abv'){
+				socket.emit(topic, data);
+			}
+
 			events.unshift({
 				topic: topic,
 				id: newGuid(),

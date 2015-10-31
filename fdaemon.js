@@ -26,6 +26,16 @@ var push = function (temperature) {
     push(Math.floor(Math.random() * 3) - 1 + temperature);
   }, 2000);
 }
+io.on('calculated-abv', function (data) {
+  var gravity =
+  {
+    session: session,
+    timestamp: moment.utc().valueOf(),
+    originalGravity: data.originalGravity,
+    finalGravity: data.finalGravity
+  };
+  db.gravities.add(gravity);
+});
 
 // var sqlite3 = require('sqlite3').verbose();
 // var db = new sqlite3.Database(':memory:');

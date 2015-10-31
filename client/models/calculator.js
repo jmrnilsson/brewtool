@@ -21,7 +21,7 @@ define([
 
             // Only publish if user initiated calculation
             if (arguments.length > 0){
-                events.emit('calculated-abv', {abv: result, mode: mode()});
+                events.emit('calculated-abv', {abv: result, mode: mode(), originalGravity: og, finalGravity: fg});
             }
         }
         catch(error){
