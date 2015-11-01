@@ -1,6 +1,6 @@
 {
   "name": "Brew Tools",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Web application for measuring temperature and calculating ABV",
   "main": "bower.json",
   "moduleType": [
