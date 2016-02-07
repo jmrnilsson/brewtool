@@ -74,3 +74,4 @@ The software licensed under MIT although other licenses also apply. See license 
 + 1. PySerial https://github.com/pyserial/pyserial/tree/master/examples
 + 2. SocketIO https://github.com/miguelgrinberg/python-socketio
 + 3. Setting up *wheels* and *virtualenv* http://python-packaging-user-guide.readthedocs.org/en/latest/installing/
++ 4. ChartJS http://www.chartjs.org/docs/
