@@ -76,3 +76,4 @@ The software licensed under MIT although other licenses also apply. See license 
 + 3. Setting up *wheels* and *virtualenv* http://python-packaging-user-guide.readthedocs.org/en/latest/installing/
 + 4. ChartJS http://www.chartjs.org/docs/
 + 5. http://stackoverflow.com/questions/8110310/simple-way-to-query-connected-usb-devices-info-in-python
++ 6. https://github.com/hotzenklotz/Flask-React-Webpack-Server/
