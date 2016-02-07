@@ -69,3 +69,7 @@ To start type:
 The software licensed under MIT although other licenses also apply. See license __LICENSE.md__ for more information.
 * The font __league gothic regular webfont__ is licensed under Open Font License. See https://github.com/theleagueof/league-gothic for more information about their work. See license __Open Font License.markdown__ for more information. Copyright holders are Caroline Hadilaksono & Micah Rich.
 * The sound __Blop-Mark_DiAngelo-79054334__ is the word of Mark DiAngelo. It is licensed under CC-BY-3.0 Attribution. See license __CC-BY-3.0-legalcode.txt__ for more information.
+
+## Additional resources
++ 1. PySerial https://github.com/pyserial/pyserial/tree/master/examples
++ 2. SocketIO https://github.com/miguelgrinberg/python-socketio
