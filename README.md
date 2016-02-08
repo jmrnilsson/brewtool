@@ -77,3 +77,4 @@ The software licensed under MIT although other licenses also apply. See license 
 + 4. ChartJS http://www.chartjs.org/docs/
 + 5. http://stackoverflow.com/questions/8110310/simple-way-to-query-connected-usb-devices-info-in-python
 + 6. https://github.com/hotzenklotz/Flask-React-Webpack-Server/
++ 7. http://playground.arduino.cc/Main/InternalTemperatureSensor
