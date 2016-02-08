@@ -78,3 +78,4 @@ The software licensed under MIT although other licenses also apply. See license 
 + 5. http://stackoverflow.com/questions/8110310/simple-way-to-query-connected-usb-devices-info-in-python
 + 6. https://github.com/hotzenklotz/Flask-React-Webpack-Server/
 + 7. http://playground.arduino.cc/Main/InternalTemperatureSensor
++ 8. https://github.com/foreverjs/forever
