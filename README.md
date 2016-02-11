@@ -79,3 +79,4 @@ The software licensed under MIT although other licenses also apply. See license 
 + 6. https://github.com/hotzenklotz/Flask-React-Webpack-Server/
 + 7. http://playground.arduino.cc/Main/InternalTemperatureSensor
 + 8. https://github.com/foreverjs/forever
+http://socket.io/get-started/chat/
