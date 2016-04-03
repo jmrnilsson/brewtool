@@ -32,7 +32,7 @@ define([
     Path.listen();
 
     // Attach listener (this also wires socket.io)
-    function onDocumentReady() {
+    (function() {
       var navbarText = document.getElementsByClassName('navbar-text')[0];
       navbarText.innerHTML = bower.version;
       ko.applyBindings(model, document.body);
@@ -41,9 +41,7 @@ define([
       socket.on('sense-temperature', function(event) {
         events.emit('sense-temperature', event);
       });
-      document.removeEventListener('DOMContentLoaded', this);
-    }
-    document.addEventListener('DOMContentLoaded', onDocumentReady);
+    }());
   }
 
   return { start: start };
