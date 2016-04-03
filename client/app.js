@@ -5,14 +5,16 @@ define([
   'utils/extensions',
   'path',
   'immutable',
-  'text!./bower.json'
-], function(ko, events, $, extensions, Path, Immutable, bowerConfiguration){
+  'text!./bower.json',
+  'socketio'
+], function(ko, events, $, extensions, Path, Immutable, bowerConfiguration, io){
 
   function start(){
     // Declare routes and read configuration
     var bower = JSON.parse(bowerConfiguration);
     var routes = Immutable.List.of('temperature', 'calculator', 'log');
     var model = {route: ko.observable(routes.get(0))};
+    var socket = null;
 
     // Register ko
     ko.components.register('temperature', { require: 'views/temperatureView' });
@@ -30,13 +32,16 @@ define([
     Path.listen();
 
     // Attach listener (this also wires socket.io)
-    events.attach();
+    (function() {
+        socket = io.connect('http://' + location.host);
+        socket.on('sense-temperature', function (event) {
+            events.emit('sense-temperature', event);
+        });
 
-    $(function(){
-      var navbarText = document.getElementsByClassName('navbar-text')[0];
-      navbarText.innerHTML = bower.version;
-      ko.applyBindings(model, document.body);
-    });
+        var navbarText = document.getElementsByClassName('navbar-text')[0];
+        navbarText.innerHTML = bower.version;
+        ko.applyBindings(model, document.body);
+	}());
   }
 
   return {

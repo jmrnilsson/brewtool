@@ -19,7 +19,7 @@ define([
             var result = Abv.getAbv(mode(), og, fg);
             abv(format(result.text));
 
-            // Only publish if user initiated calculation
+            // Publish only user-initiated
             if (arguments.length > 0){
                 events.emit('calculated-abv', {abv: result, mode: mode()});
             }

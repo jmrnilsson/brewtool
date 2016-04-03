@@ -1,8 +1,7 @@
 define([
     'knockout',
-    'toastr',
     'utils/events'
-], function (ko, toastr, e) {
+], function (ko, e) {
 'use strict';
 
     var temperatures = ko.pureComputed(function(){

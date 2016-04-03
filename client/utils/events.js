@@ -8,11 +8,6 @@ define([
 	var socket = null;
 	var events = ko.observableArray();
 
-	function attach(){
-		socket = io.connect('http://' + location.host);
-		socket.on('sense-temperature', function (event) {emit('sense-temperature', event);});
-	}
-
 	function emit(topic, data){
 		function add(topic, data){
 			if (topic == undefined){
@@ -65,7 +60,6 @@ define([
 
 	return {
 		events: events,
-		emit: emit,
-		attach: attach
+		emit: emit
 	};
 });
