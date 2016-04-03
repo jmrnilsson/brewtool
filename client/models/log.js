@@ -11,12 +11,12 @@ define([
   });
 
   var filteredEvents = ko.pureComputed(function() {
-    var currentQuery = query();
-    if (!!currentQuery) {
+    var q = query();
+    if (q !== undefined || q !== '') {
       return e.events().slice(0, 250);
     }
     return ko.utils.arrayFilter(e.events(), function(ev) {
-      return ev.topic.indexOf(currentQuery) > -1;
+      return ev.topic.indexOf(q) > -1;
     });
   });
 

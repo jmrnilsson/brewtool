@@ -13,6 +13,7 @@ define([
     return s() + s() + '-' + s() + '-' + s() + '-' + s() + '-' + s() + s() + s();
   }
 
+  session = newGuid();
 
   function emit(topic, data) {
     function add(t, d) {
@@ -52,9 +53,6 @@ define([
     return hash;
     };
   */
-
-
-  session = newGuid();
 
   return {
     events: events,

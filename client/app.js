@@ -31,17 +31,16 @@ define([
     Path.root('#/' + routes.get(0));
     Path.listen();
 
-    // Attach listener (this also wires socket.io)
-    (function() {
-      var navbarText = document.getElementsByClassName('navbar-text')[0];
-      navbarText.innerHTML = bower.version;
-      ko.applyBindings(model, document.body);
+    // Bind ko
+    document.getElementsByClassName('navbar-text')[0].innerHTML = bower.version;
+    ko.applyBindings(model, document.body);
 
-      socket = io.connect('http://' + location.host);
-      socket.on('sense-temperature', function(event) {
-        events.emit('sense-temperature', event);
-      });
-    }());
+    // Attach listener (this also wires socket.io)
+    socket = io.connect('http://' + location.host);
+    socket.on('sense-temperature', function(event) {
+      events.emit('sense-temperature', event);
+    });
+
   }
 
   return { start: start };
