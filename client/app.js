@@ -7,13 +7,13 @@ define([
   'immutable',
   'text!./bower.json',
   'socketio'
-], function (ko, events, $, extensions, Path, Immutable, bowerConfiguration, io) {
+], function(ko, events, $, extensions, Path, Immutable, bowerConfiguration, io) {
 
   function start() {
     // Declare routes and read configuration
     var bower = JSON.parse(bowerConfiguration);
     var routes = Immutable.List.of('temperature', 'calculator', 'log');
-    var model = {route: ko.observable(routes.get(0))};
+    var model = { route: ko.observable(routes.get(0)) };
     var socket = null;
 
     // Register ko
@@ -25,8 +25,8 @@ define([
     ko.extenders.float = extensions.float;
 
     // Listen to paths
-    routes.forEach(function (r, index, all) {
-      Path.map('#/' + all.get(index)).to(function () {model.route(all.get(index));});
+    routes.forEach(function(r, index, all) {
+      Path.map('#/' + all.get(index)).to(function() { model.route(all.get(index)); });
     });
     Path.root('#/' + routes.get(0));
     Path.listen();
@@ -38,7 +38,7 @@ define([
       ko.applyBindings(model, document.body);
 
       socket = io.connect('http://' + location.host);
-      socket.on('sense-temperature', function (event) {
+      socket.on('sense-temperature', function(event) {
         events.emit('sense-temperature', event);
       });
       document.removeEventListener('DOMContentLoaded', this);
@@ -46,5 +46,5 @@ define([
     document.addEventListener('DOMContentLoaded', onDocumentReady);
   }
 
-  return {start: start};
+  return { start: start };
 });

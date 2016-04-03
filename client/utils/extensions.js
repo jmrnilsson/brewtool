@@ -1,6 +1,6 @@
 define([
   'knockout'
-], function (ko) {
+], function(ko) {
   'use strict';
 
   function gravityExtension(target) {

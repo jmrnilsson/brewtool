@@ -1,6 +1,6 @@
 define([
   'knockout'
-], function (ko) {
+], function(ko) {
   'use strict';
 
   var session;
@@ -16,7 +16,7 @@ define([
 
   function emit(topic, data) {
     function add(t, d) {
-      if (t === undefined) {
+      if (!t) {
         throw new Error('Event is missing a topic');
       }
 
@@ -34,9 +34,9 @@ define([
     setTimeout(add(topic, data), 0);
   }
 
-// Move to string prototype or use ko-mapper in log-model
-/*
-  function hashCode(text) {
+  // Move to string prototype or use ko-mapper in log-model
+  /*
+    function hashCode(text) {
     var hash = 0;
     var i;
     var chr;
@@ -50,8 +50,8 @@ define([
       hash |= 0;
     }
     return hash;
-  };
-*/
+    };
+  */
 
 
   session = newGuid();

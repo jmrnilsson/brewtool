@@ -1,8 +1,8 @@
 define([
   'models/log',
   'text!/templates/log.html'
-], function (viewModel, template) {
+], function(viewModel, template) {
   'use strict';
 
-  return {viewModel: viewModel, template: template};
+  return { viewModel: viewModel, template: template };
 });
