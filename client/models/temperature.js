@@ -13,7 +13,10 @@ define([
     });
     return first ? first.data.temperature : '';
   });
-  var tempText = ko.pureComputed(function() { return temp() ? temp() + ' °C' : ''; });
+  var tempText = ko.pureComputed(function() {
+    var t = temp();
+    return t || t === 0 ? temp() + ' °C' : '';
+  });
 
   temp.subscribe(function() {
     var t = temp();
