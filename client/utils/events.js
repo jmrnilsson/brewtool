@@ -35,25 +35,6 @@ define([
     setTimeout(add(topic, data), 0);
   }
 
-  // Move to string prototype or use ko-mapper in log-model
-  /*
-    function hashCode(text) {
-    var hash = 0;
-    var i;
-    var chr;
-    var len;
-    if (text.length == 0) {
-      return hash;
-    }
-    for (i = 0, len = text.length; i < len; i++) {
-      chr = text.charCodeAt(i);
-      hash = ((hash << 5) - hash) + chr;
-      hash |= 0;
-    }
-    return hash;
-    };
-  */
-
   return {
     events: events,
     emit: emit
