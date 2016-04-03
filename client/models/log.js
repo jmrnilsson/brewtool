@@ -7,12 +7,13 @@ define([
 
   var query = ko.observable();
   var enabledFilter = ko.pureComputed(function() {
-    return query() !== undefined && query() !== '';
+    var q = query();
+    return q !== undefined && q !== '';
   });
 
   var filteredEvents = ko.pureComputed(function() {
     var q = query();
-    if (q !== undefined || q !== '') {
+    if (q === undefined || q === '') {
       return e.events().slice(0, 250);
     }
     return ko.utils.arrayFilter(e.events(), function(ev) {
