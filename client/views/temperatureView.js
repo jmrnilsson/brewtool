@@ -1,8 +1,8 @@
 define([
-	'models/temperature',
-	'text!/templates/temperature.html'
+  'models/temperature',
+  'text!/templates/temperature.html'
 ], function (viewModel, template) {
-'use strict';
+  'use strict';
 
-	return {viewModel: viewModel, template: template};	
+  return {viewModel: viewModel, template: template};
 });

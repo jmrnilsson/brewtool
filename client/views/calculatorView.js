@@ -1,8 +1,8 @@
 define([
-	'models/calculator',
-	'text!/templates/calculator.html'
+  'models/calculator',
+  'text!/templates/calculator.html'
 ], function (viewModel, template) {
-'use strict';
+  'use strict';
 
-	return {viewModel: viewModel, template: template};		
+  return {viewModel: viewModel, template: template};
 });
