@@ -12,15 +12,11 @@ To get started, clone the repo and type:
 
     git clone https://github.com/jmrnilsson/brewtool.git
     cd brewtool
-    cd client
-    bower install
-    cd ..
-    npm install
+    sh setup.sh
 
-That's the setup. To start type the following command (assuming current directory is the root of the repository):
+That's the setup. To start type the following command (this will start a simulation daemon):
 
-    cd server
-    node fdaemon.js
+    sh run.sh
 
 __Note__: fdaemon is a fake daemon that simulates getting sensing information by randomizing a temperature change of 0, -1, 1 degree C every two seconds
 Nodejs, Express and socket.io should be up and running. You should be able to browse to url indicated by node, usually:
@@ -48,16 +44,11 @@ That's it. There may be dependencies to Python from socket.io. There is a depend
 Make sure all packages are installed type in the root of the repository:
 
     npm install
-    npm install serialport
-    node daemon.js
-    cd ..
-    cd client
-    bower install
-    cd ..
+    npm install serialport --save
+    sh setup
 
 To start type:
 
-    cd server
     node daemon.js
 
 ### Additional information about the Arduino setup
@@ -79,4 +70,4 @@ The software licensed under MIT although other licenses also apply. See license 
 + 6. https://github.com/hotzenklotz/Flask-React-Webpack-Server/
 + 7. http://playground.arduino.cc/Main/InternalTemperatureSensor
 + 8. https://github.com/foreverjs/forever
-http://socket.io/get-started/chat/
++ 9. http://socket.io/get-started/chat/

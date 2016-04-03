@@ -7,13 +7,13 @@ define([
   'immutable',
   'text!./bower.json',
   'socketio'
-], function(ko, events, $, extensions, Path, Immutable, bowerConfiguration, io){
+], function(ko, events, $, extensions, Path, Immutable, bowerConfiguration, io) {
 
-  function start(){
+  function start() {
     // Declare routes and read configuration
     var bower = JSON.parse(bowerConfiguration);
     var routes = Immutable.List.of('temperature', 'calculator', 'log');
-    var model = {route: ko.observable(routes.get(0))};
+    var model = { route: ko.observable(routes.get(0)) };
     var socket = null;
 
     // Register ko
@@ -25,26 +25,23 @@ define([
     ko.extenders.float = extensions.float;
 
     // Listen to paths
-    routes.forEach(function(r, index, all){
-      Path.map('#/' + all.get(index)).to(function () {model.route(all.get(index));});
+    routes.forEach(function(r, index, all) {
+      Path.map('#/' + all.get(index)).to(function() { model.route(all.get(index)); });
     });
     Path.root('#/' + routes.get(0));
     Path.listen();
 
-    // Attach listener (this also wires socket.io)
-    (function() {
-        socket = io.connect('http://' + location.host);
-        socket.on('sense-temperature', function (event) {
-            events.emit('sense-temperature', event);
-        });
+    // Bind ko
+    document.getElementsByClassName('navbar-text')[0].innerHTML = bower.version;
+    ko.applyBindings(model, document.body);
 
-        var navbarText = document.getElementsByClassName('navbar-text')[0];
-        navbarText.innerHTML = bower.version;
-        ko.applyBindings(model, document.body);
-	}());
+    // Attach listener (this also wires socket.io)
+    socket = io.connect('http://' + location.host);
+    socket.on('sense-temperature', function(event) {
+      events.emit('sense-temperature', event);
+    });
+
   }
 
-  return {
-    start: start
-  };
+  return { start: start };
 });
