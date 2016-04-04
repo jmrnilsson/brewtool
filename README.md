@@ -1,43 +1,45 @@
 # brewtool
 
 ## Description
-A small web application for monitoring brewing temperature when brewing beer or really anything. It also provides a calculator and has a log thingy. It is intended to be used with an Arduino, but does include a fake daemon to "simulate" temperature changes.
+A small web application for monitoring brewing and sparging temperature when brewing beer or really anything. It also provides a calculator and has a log thingy. It is intended to be used with an Arduino but also include a fake daemon to "simulate" temperature changes.
+
+## Prerequisites 
+Application | Link/Command 
+------ | ------ 
+nodejs | https://nodejs.org/en/ 
+npm | https://nodejs.org/en/download/ 
+bower | `npm install -g bower`
 
 ## Simplified setup (without Arduino sensing)
-Nodejs and Bower is need to install the necessary packages. The following command installs Bower globally,
-
-    npm install -g bower
-
-To get started, clone the repo and type:
+To get started; clone the run the setup. This will clear any cached dependencies, if they exists, and install them from scratch:
 
     git clone https://github.com/jmrnilsson/brewtool.git
     cd brewtool
     sh setup.sh
 
-That's the setup. To start type the following command (this will start a simulation daemon):
+That's all. To start type command mentioned below. This will start a simulated daemon and open a browser (on OSX at least) which may change the temperature one degree in either direction every two seconds. 
 
-    sh run.sh
+    sh run.sh 
+    open http://localhost:3000/
 
-__Note__: fdaemon is a fake daemon that simulates getting sensing information by randomizing a temperature change of 0, -1, 1 degree C every two seconds
-Nodejs, Express and socket.io should be up and running. You should be able to browse to url indicated by node, usually:
-
-    http://localhost:3000/
-
-That's it. There may be dependencies to Python from socket.io. There is a dependency to Python 2.7.* from serialport (which is used for the Arduino sensing setup mentioned below).
+That's it. Have fun!
 
 ## Setup with sensing
-### Prerequisites before actual sensing with Arduino
-* Arduino
-* USB-cable
-* Waterproof temperature sensor supporting OneWire (i.e. DS18B20, DS1822, DS1820)
-* Library: Dallas Temperature, https://github.com/milesburton/Arduino-Temperature-Control-Library
-* Library: OneWire, http://playground.arduino.cc/Learning/OneWire
-* Install Python 2.7.x, https://www.python.org/downloads/. This is used by SerialPort during package installation and creates OS-specific packages.
-* Install Arduino Software, IDE https://www.arduino.cc/en/Guide/HomePage
+### Prerequisites before sensing with Arduino
+Application | Link/Command | Comment   
+------ | ------ | ------
+python 2.7.* | [https://www.python.org](https://www.python.org/download/releases/2.7/) | Only needed during build of SerialPort by node-gyp
+An Arduino board | | 
+A USB-cable | | 
+Waterproof OneWire temperature sensor | | i.e. DS18B20, DS1822, DS1820
+Dallas Temperature | https://github.com/milesburton/Arduino-Temperature-Control-Library | Library 
+OneWire | http://playground.arduino.cc/Learning/OneWire | Library
+Install Arduino Software | IDE https://www.arduino.cc/en/Guide/HomePage | Other tools can be used of course
 
-### Before sensing with arduino
+### Preparation 
+* Connect the thermometer with a correct resistor (according attached instructions). 
 * Look at the script in the IC folder. The thermomenter variable needs to be configured to the identity of the temperature sensor. This is the OneWire DeviceAddress. The script is called __./arduino/arduino_temperature_sensing.ino__
-* Connect temperature sensor, USB a.s.o
+* Connect temperature sensor with a USB
 * Make sure all the node packages are installed (see below)
 * Browse to http://localhost:3000/
 
