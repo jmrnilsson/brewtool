@@ -11,9 +11,9 @@
 }
 
 h1, .h1 {
-	text-transform: uppercase;
-	font-family: "league-gothic-1",Impact,sans-serif;
-	font-size: 136px;
+  text-transform: uppercase;
+  font-family: "league-gothic-1",Impact,sans-serif;
+  font-size: 136px;
   font-weight: normal;
   line-height: 140px;
   color: #888;
@@ -30,9 +30,9 @@ h2, .h2 {
 }
 
 h3, .h3 {
-	text-transform: uppercase;
-	font-family: "league-gothic-1",Impact,sans-serif;
-	font-size: 18px;
+  text-transform: uppercase;
+  font-family: "league-gothic-1",Impact,sans-serif;
+  font-size: 18px;
   font-weight: normal;
   line-height: 50px;
   color: #888;
@@ -40,9 +40,9 @@ h3, .h3 {
 }
 
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 i {
-	color: #888;
+  color: #888;
 }
