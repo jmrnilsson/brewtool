@@ -6,8 +6,10 @@ define([
   'path',
   'immutable',
   'text!./bower.json',
-  'socketio'
-], function(ko, events, $, extensions, Path, Immutable, bowerConfiguration, io) {
+  'socketio',
+  'views'
+// eslint-disable-next-line no-unused-vars
+], function(ko, events, $, extensions, Path, Immutable, bowerConfiguration, io, views) {
 
   function start() {
     // Declare routes and read configuration
@@ -17,10 +19,16 @@ define([
     var socket = null;
 
     // Register ko
-    ko.components.register('temperature', { require: 'views/temperatureView' });
-    ko.components.register('calculator', { require: 'views/calculatorView' });
-    ko.components.register('log', { require: 'views/logView' });
-    ko.components.register('chart', { require: 'views/chartView' });
+    // ko.components.register('temperature', { require: views.temperature});
+    // ko.components.register('calculator', { require: views.calculator});
+    // ko.components.register('log', { require: views.log});
+    // ko.components.register('temperature', { require: 'views/temperatureView' });
+    // ko.components.register('calculator', { require: 'views/calculatorView' });
+    // ko.components.register('log', { require: 'views/logView' });
+    // ko.components.register('chart', { require: 'views/chartView' });
+    ko.components.register('temperature', { require: 'temperatureView' });
+    ko.components.register('calculator', { require: 'calculatorView' });
+    ko.components.register('log', { require: 'logView' });
     ko.extenders.gravity = extensions.gravity;
     ko.extenders.float = extensions.float;
 
