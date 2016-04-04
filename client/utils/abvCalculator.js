@@ -37,7 +37,7 @@ define([], function() {
   }
 
   // Validation
-  function validate(originalGravity, finalGravity, mode) {
+  function validate(mode, originalGravity, finalGravity) {
     var msg = 'Calculation mode type not available. Options include simple, compensated, plato';
     var errors = [];
 
@@ -76,7 +76,7 @@ define([], function() {
   function calculateAbv(mode, originalGravity, finalGravity) {
     var og = toDecimal(originalGravity);
     var fg = toDecimal(finalGravity);
-    var errors = validate(og, fg, mode);
+    var errors = validate(mode, og, fg);
 
     if (errors.length > 0) {
       throw new Error(errors[0]);

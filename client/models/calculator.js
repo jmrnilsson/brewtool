@@ -34,7 +34,7 @@ define([
       }
     } catch (error) {
       abv(format(null));
-      AbvCalculator.errors(og, fg).forEach(function(e) {
+      AbvCalculator.errors(m, og, fg).forEach(function(e) {
         toastr.error(e);
       });
     }
