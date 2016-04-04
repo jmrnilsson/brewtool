@@ -1,42 +1,42 @@
 @font-face {
-    font-family: "league-gothic-1";
-    src: url(/resources/leaguegothic-regular-webfont.ttf) format("truetype");
+  font-family: "league-gothic-1";
+  src: url(/resources/leaguegothic-regular-webfont.ttf) format("truetype");
 }
 
 .logo {
-    text-transform: uppercase;
-	font-family: "league-gothic-1",Impact,sans-serif;
-    font-weight: 125%;
-    line-height: 130%;
+  text-transform: uppercase;
+  font-family: "league-gothic-1",Impact,sans-serif;
+  font-weight: 125%;
+  line-height: 130%;
 }
 
 h1, .h1 {
 	text-transform: uppercase;
 	font-family: "league-gothic-1",Impact,sans-serif;
 	font-size: 136px;
-    font-weight: normal;
-    line-height: 140px;
-    color: #888;
+  font-weight: normal;
+  line-height: 140px;
+  color: #888;
 }
 
 h2, .h2 {
 	text-transform: uppercase;
 	font-family: "league-gothic-1",Impact,sans-serif;
 	font-size: 24px;
-    font-weight: normal;
-    line-height: 30px;
-    color: #888;
-    text-align: left;
+  font-weight: normal;
+  line-height: 30px;
+  color: #888;
+  text-align: left;
 }
 
 h3, .h3 {
 	text-transform: uppercase;
 	font-family: "league-gothic-1",Impact,sans-serif;
 	font-size: 18px;
-    font-weight: normal;
-    line-height: 50px;
-    color: #888;
-    text-align: left;
+  font-weight: normal;
+  line-height: 50px;
+  color: #888;
+  text-align: left;
 }
 
 .center {
@@ -45,43 +45,4 @@ h3, .h3 {
 
 i {
 	color: #888;
-}
-
-# animation
-@-webkit-keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-.fade-in-200 {
-  -webkit-animation: fadeIn .2s ease-in 1 forwards;
-  animation: fadeIn .2s ease-in 1 forwards;
-  opacity: 0;
-}
-.fade-in-300 {
-  -webkit-animation: fadeIn .3s ease-in 1 forwards;
-  animation: fadeIn .3s ease-in 1 forwards;
-  opacity: 0;
-}
-.fade-in-400 {
-  -webkit-animation: fadeIn .4s ease-in 1 forwards;
-  animation: fadeIn .4s ease-in 1 forwards;
-  opacity: 0;
-}
-.fade-in-500 {
-  -webkit-animation: fadeIn .5s ease-in 1 forwards;
-  animation: fadeIn .5s ease-in 1 forwards;
-  opacity: 0;
-}
-
-.is-paused {
-  -webkit-animation-play-state: paused;
-  animation-play-state: paused;
 }
