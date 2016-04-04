@@ -19,9 +19,9 @@ To get started; clone the run the setup. This will clear any cached dependencies
 
 That's all. To start type command mentioned below. This will start a simulated daemon and open a browser (on OSX at least) which may change the temperature one degree in either direction every two seconds. 
 
-    sh run.sh 
     open http://localhost:3000/
-
+    sh run.sh 
+    
 That's it. Have fun!
 
 ## Setup with sensing
