@@ -11,29 +11,6 @@ define([], function() {
   Compensated
   Makes adjustments for real extract. Slighly better than the simplified formula.
   http://www.ratebeer.com/forums/calculating-abv_121228.htm
-  %ABV =
-  (
-    (
-      (
-        668.72*OG - 463.37 - 205.347 * OG^2
-      ) -
-      (
-        0.1808 *
-        (
-          668.72*OG - 463.37 - 205.347 * OG^2
-        ) + 0.8192 *
-        (
-          668.72*FG - 463.37 - 205.347 * FG^2
-        )
-      )
-    ) /
-    (
-      2.0665-0.010665 *
-      (
-        668.72*OG - 463.37 - 205.347 * OG^2
-      )
-    ) / 100
-  ) * 1.25
 
   Plato:
   Less accurate around 5%, but presumably better precision on high gravity > 10%.
@@ -46,11 +23,10 @@ define([], function() {
   function compensated(og, fg) {
     var constant = 1.25;
     var divisor = (2.0665 - 0.010665 * (668.72 * og - 463.37 - 205.347 * Math.pow(og, 2)));
-    var divident0 = 668.72 * og - 463.37 - 205.347 * Math.pow(og, 2);
+    var dividend0 = 668.72 * og - 463.37 - 205.347 * Math.pow(og, 2);
     var dividend1 = 0.1808 * (668.72 * og - 463.37 - 205.347 * Math.pow(og, 2));
     var dividend2 = 0.8192 * (668.72 * fg - 463.37 - 205.347 * Math.pow(fg, 2));
-
-    return constant * ((divident0 - dividend1 - dividend2) / divisor);
+    return constant * ((dividend0 - dividend1 - dividend2) / divisor);
   }
 
   function plato(og, fg) {
@@ -79,7 +55,6 @@ define([], function() {
         errors.push(gravityType + ' gravity is too high');
       }
     }
-
     ensureBounds(originalGravity, 'Original');
     ensureBounds(finalGravity, 'Final');
 
@@ -103,28 +78,21 @@ define([], function() {
     var fg = toDecimal(finalGravity);
     var errors = validate(og, fg, mode);
 
-    function Abv(value) {
-      var self = this;
-      self.text = value.toFixed(2);
-      self.value = value;
-    }
-
-
     if (errors.length > 0) {
       throw new Error(errors[0]);
     }
 
     // Use switch to avoid hasOwnProperties and linter mistakes
     switch (mode) {
-      case 'simple': return new Abv(simple(og, fg));
-      case 'compensated': return new Abv(compensated(og, fg));
-      case 'plato': return new Abv(plato(og, fg));
+      case 'simple': return simple(og, fg);
+      case 'compensated': return compensated(og, fg);
+      case 'plato': return plato(og, fg);
       default: throw Error('Something went wrong');
     }
   }
 
   return {
-    getAbv: calculateAbv,
-    getErrors: validate
+    calculate: calculateAbv,
+    errors: validate
   };
 });

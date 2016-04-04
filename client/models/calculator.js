@@ -4,7 +4,7 @@ define([
   'toastr',
   'utils/events',
   'models/gravity'
-], function(ko, Abv, toastr, events, Gravity) {
+], function(ko, AbvCalculator, toastr, events, Gravity) {
   'use strict';
 
   var gravity = new Gravity(1050, 1010);
@@ -15,25 +15,26 @@ define([
   var abv = ko.observable();
 
   function format(alcoholByVolume) {
-    return alcoholByVolume ? alcoholByVolume + ' %' : 'N/A';
+    return alcoholByVolume ? alcoholByVolume.toFixed(2) + ' %' : 'N/A';
   }
 
 
   function calculate() {
     var og = gravity.original();
     var fg = gravity.final();
-    var result;
+    var m = mode();
+    var newAbv;
     try {
-      result = Abv.getAbv(mode(), og, fg);
-      abv(format(result.text));
+      newAbv = AbvCalculator.calculate(m, og, fg);
+      abv(format(newAbv));
 
       // Publish only user-initiated
       if (arguments.length > 0) {
-        events.emit('calculated-abv', { abv: result, mode: mode() });
+        events.emit('calculated-abv', { abv: newAbv, mode: m });
       }
     } catch (error) {
       abv(format(null));
-      Abv.getErrors(og, fg).forEach(function(e) {
+      AbvCalculator.errors(og, fg).forEach(function(e) {
         toastr.error(e);
       });
     }
