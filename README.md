@@ -30,7 +30,7 @@ Application | Link/Command | Comment
 ------ | ------ | ------
 python 2.7.* | [https://www.python.org](https://www.python.org/download/releases/2.7/) | Only needed during build of SerialPort by node-gyp
 An Arduino board | | 
-A USB-cable | | 
+A USB-cable | | i.e. Rev3 or something similar
 Waterproof OneWire temperature sensor | | i.e. DS18B20, DS1822, DS1820
 Dallas Temperature | https://github.com/milesburton/Arduino-Temperature-Control-Library | Library 
 OneWire | http://playground.arduino.cc/Learning/OneWire | Library
@@ -45,7 +45,6 @@ Install Arduino Software | IDE https://www.arduino.cc/en/Guide/HomePage | Other 
 
 Make sure all packages are installed type in the root of the repository:
 
-    npm install
     npm install serialport --save
     sh setup
 
