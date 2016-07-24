@@ -9,21 +9,21 @@
       <form class="form-horizontal">
         <div class="form-group">
           <label for="temperature" class="col-sm-4 control-label">Temperature</label>
-          <div class="input-group col-sm-3" id="temperature">
+          <div class="input-group col-sm-4" id="temperature">
             <input type="text" class="form-control" aria-label="Current temperature" disabled="disabled" data-bind="value: temp()">
             <span class="input-group-addon">°C</span>
           </div>
         </div>
         <div class="form-group">
           <label for="low" class="col-sm-4 control-label">Low</label>
-          <div class="input-group col-sm-3" id="low">
+          <div class="input-group col-sm-4" id="low">
             <input type="text" class="form-control" aria-label="Highest temperature" disabled="disabled" data-bind="value: low()">
             <span class="input-group-addon">°C</span>
           </div>
         </div>
         <div class="form-group">
           <label for="high" class="col-sm-4 control-label">High</label>
-          <div class="input-group col-sm-3" id="high">
+          <div class="input-group col-sm-4" id="high">
             <input type="text" class="form-control" aria-label="Lowest temperature" disabled="disabled" data-bind="value: high()">
             <span class="input-group-addon">°C</span>
           </div>
@@ -48,7 +48,7 @@
           <div class="col-sm-4">
             <input type="text" class="form-control" id="alarm1" aria-label="High bound" placeholder="e.g. 72" data-bind="value: high, valueUpdate: 'afterkeydown'">
             <span class="glyphicon form-control-feedback" data-bind="css: {'glyphicon-remove': high.hasError(), 'glyphicon-ok': !high.hasError()}"></span>
-          </div>  
+          </div>
         </div>
         <div class="form-group">
           <label for="alarm2" class="col-sm-4 control-label">Sound</label>
@@ -62,8 +62,8 @@
             </div>
           </div>
         </div>
-      </form>  
+      </form>
     </div>
   </div>
-</div>  
+</div>
 
