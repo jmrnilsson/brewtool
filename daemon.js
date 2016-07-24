@@ -2,21 +2,34 @@ var express = require('express');
 var app = module.exports = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-var serialport = require('serialport');
-var SerialPort = serialport.SerialPort;
+var SerialPort = require('serialport');
+var fs = require('fs');
 
 // Alternatively new SerialPort("/dev/tty-usbserial1", { baudrate: 9600})
-var options = { baudrate: 9600, parser: serialport.parsers.readline('\n\r') };
-var serialPort = new SerialPort('COM4', options);
+// Alternatively new SerialPort("/dev/cu-usbmodel1421", options)
+// var serialPort = new SerialPort('COM4', options);
+var options = { baudrate: 9600, parser: SerialPort.parsers.readline('\n\r') };
+var serialPort = new SerialPort('/dev/cu.usbmodem1421', options);
 var port = 3000;
-
+var log;
 app.use(express.static('./client/'));
 console.log('Daemon is listening on port ' + port + '.\nPress ctrl + c to close.');
 server.listen(port);
 
+function getDateString() {
+  var date = new Date();
+  return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' '
+         + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + ':'
+         + date.getMilliseconds();
+}
+log = fs.createWriteStream(getDateString() + '.log.csv');
+log.write('UtcDate;TemperatureC\n\r"');
+// wstream.end();
 
 serialPort.on('open', function() {
   serialPort.on('data', function(data) {
-    io.sockets.emit('sense-temperature', { temperature: data, utc: new Date().toUTCString() });
+    var utcDate = new Date().toUTCString();
+    log.write(getDateString() + ';' + data + '\n\r');
+    io.sockets.emit('sense-temperature', { temperature: data, utc: utcDate });
   });
 });

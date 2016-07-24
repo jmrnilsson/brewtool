@@ -3,11 +3,11 @@
 ## Description
 A small web application for monitoring brewing and sparging temperature when brewing beer or really anything. It also provides a calculator and has a log thingy. It is intended to be used with an Arduino but also include a fake daemon to "simulate" temperature changes.
 
-## Prerequisites 
-Application | Link/Command 
------- | ------ 
-nodejs | https://nodejs.org/en/ 
-npm | https://nodejs.org/en/download/ 
+## Prerequisites
+Application | Link/Command
+------ | ------
+nodejs | https://nodejs.org/en/
+npm | https://nodejs.org/en/download/
 bower | `npm install -g bower`
 
 ## Simplified setup (without Arduino sensing)
@@ -17,27 +17,27 @@ To get started; clone the run the setup. This will clear any cached dependencies
     cd brewtool
     sh setup.sh
 
-That's all. To start type command mentioned below. This will start a simulated daemon and open a browser (on OSX at least) which may change the temperature one degree in either direction every two seconds. 
+That's all. To start type command mentioned below. This will start a simulated daemon and open a browser (on OSX at least) which may change the temperature one degree in either direction every two seconds.
 
     open http://localhost:3000/
-    sh run.sh 
-    
+    sh run.sh
+
 That's it. Have fun!
 
 ## Setup with sensing
 ### Prerequisites before sensing with Arduino
-Application | Link/Command | Comment   
+Application | Link/Command | Comment
 ------ | ------ | ------
 python 2.7.* | [https://www.python.org](https://www.python.org/download/releases/2.7/) | Only needed during build of SerialPort by node-gyp
-An Arduino board | | 
+An Arduino board | |
 A USB-cable | | i.e. Rev3 or something similar
 Waterproof OneWire temperature sensor | | i.e. DS18B20, DS1822, DS1820
-Dallas Temperature | https://github.com/milesburton/Arduino-Temperature-Control-Library | Library 
+Dallas Temperature | https://github.com/milesburton/Arduino-Temperature-Control-Library | Library
 OneWire | http://playground.arduino.cc/Learning/OneWire | Library
 Install Arduino Software | IDE https://www.arduino.cc/en/Guide/HomePage | Other tools can be used of course
 
-### Preparation 
-* Connect the thermometer with a correct resistor (according attached instructions). 
+### Preparation
+* Connect the thermometer with a correct resistor (according attached instructions).
 * Look at the script in the IC folder. The thermomenter variable needs to be configured to the identity of the temperature sensor. This is the OneWire DeviceAddress. The script is called __./arduino/arduino_temperature_sensing.ino__
 * Connect temperature sensor with a USB
 * Make sure all the node packages are installed (see below)
@@ -46,7 +46,7 @@ Install Arduino Software | IDE https://www.arduino.cc/en/Guide/HomePage | Other 
 Make sure all packages are installed type in the root of the repository:
 
     npm install serialport --save
-    sh setup
+    sh setup.sh
 
 To start type:
 
