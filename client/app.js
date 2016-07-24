@@ -7,9 +7,10 @@ define([
   'immutable',
   'text!./package.json',
   'socketio',
-  'views'
+  'views',
+  'knockoutchart'
 // eslint-disable-next-line no-unused-vars
-], function(ko, events, $, extensions, Path, Immutable, packageJson, io, views) {
+], function(ko, events, $, extensions, Path, Immutable, packageJson, io, views, knockoutchart) {
 
   function start() {
     // Declare routes
