@@ -14,10 +14,17 @@ void setup(void)
 {
   Serial.begin(9600);
   sensors.begin();
-  sensors.setResolution(insideThermometer, 10);
+  sensors.setResolution(thermometer, 10);
 }
 
-void printTemperature(DeviceAddress deviceAddress)
+void loop(void)
+{ 
+  delay(250);
+  sensors.requestTemperatures();
+  broadcast(thermometer);
+}
+
+void broadcast(DeviceAddress deviceAddress)
 {
   float celcius = sensors.getTempC(deviceAddress);
   if (celcius == -127.00) 
@@ -30,11 +37,3 @@ void printTemperature(DeviceAddress deviceAddress)
   }
   Serial.print("\n\r");
 }
-
-void loop(void)
-{ 
-  delay(100);
-  sensors.requestTemperatures();
-  printTemperature(thermometer);
-}
-
