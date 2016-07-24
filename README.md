@@ -54,7 +54,8 @@ To start type:
 
 ### Additional information about the Arduino setup
 * For information on how to include Arduino libraries see, http://arduino.cc/en/Guide/Libraries.
-* How to wire or solder the temperature sensor is detailed at http://www.hobbytronics.co.uk/ds18b20-arduino.
+* How to wire or solder the temperature sensor is detailed at http://bildr.org/2011/07/ds18b20-arduino/.
+~~http://www.hobbytronics.co.uk/ds18b20-arduino~~
 * How to assign the addresses of a 1-Wire temp sensors? Look through the tutorial at http://www.hacktronics.com/Tutorials/arduino-1-wire-address-finder.html
 
 ## Licensing information
