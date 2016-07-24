@@ -18,7 +18,7 @@ void setup(void)
 }
 
 void loop(void)
-{ 
+{
   delay(250);
   sensors.requestTemperatures();
   broadcast(thermometer);
@@ -27,7 +27,7 @@ void loop(void)
 void broadcast(DeviceAddress deviceAddress)
 {
   float celcius = sensors.getTempC(deviceAddress);
-  if (celcius == -127.00) 
+  if (celcius == -127.00)
   {
     Serial.print("Error getting temperature");
   }
@@ -35,5 +35,5 @@ void broadcast(DeviceAddress deviceAddress)
   {
     Serial.print(celcius);
   }
-  Serial.print("\n\r");
+  Serial.print("\n");
 }

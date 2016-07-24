@@ -1,0 +1,25 @@
+env:
+    jasmine: true
+    node: true
+    mocha: true
+globals:
+    define: true
+    require: true
+rules:
+    indent:
+        - 2
+        - 2
+        - SwitchCase: 1
+    object-curly-spacing: 0
+    semi: 2
+    func-names: 0
+    padded-blocks: 0
+    no-param-reassign: 0
+    no-console: 0
+    space-before-function-paren:
+        - 2
+        - never
+extends: airbnb/legacy
+parserOptions:
+        ecmaVersion: 5
+        sourceType: module
