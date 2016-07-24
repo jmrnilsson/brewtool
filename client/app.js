@@ -5,18 +5,20 @@ define([
   'utils/extensions',
   'path',
   'immutable',
-  'text!./bower.json',
+  'text!./package.json',
   'socketio',
   'views'
 // eslint-disable-next-line no-unused-vars
-], function(ko, events, $, extensions, Path, Immutable, bowerConfiguration, io, views) {
+], function(ko, events, $, extensions, Path, Immutable, packageJson, io, views) {
 
   function start() {
     // Declare routes and read configuration
-    var bower = JSON.parse(bowerConfiguration);
+    var packageJsonVersion = JSON.parse(packageJson).version;
     var routes = Immutable.List.of('temperature', 'calculator', 'log');
     var model = { route: ko.observable(routes.get(0)) };
     var socket = null;
+
+    alert(JSON.stringify(Path));
 
     // Register ko
     ko.components.register('temperature', { require: 'temperatureView' });
@@ -33,7 +35,7 @@ define([
     Path.listen();
 
     // Bind ko
-    document.getElementsByClassName('navbar-text')[0].innerHTML = bower.version;
+    document.getElementsByClassName('navbar-text')[0].innerHTML = packageJsonVersion.version;
     ko.applyBindings(model, document.body);
 
     // Attach listener (this also wires socket.io)

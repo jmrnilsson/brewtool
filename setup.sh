@@ -1,5 +1,5 @@
 #!/bin/sh
 rm -rf ./client/bower_components
 rm -rf ./node_modules
-(cd client; bower install)
+(cd client; npm install)
 npm install
