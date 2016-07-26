@@ -1,4 +1,4 @@
 node_modules/
-**/node_components/
+client/node_components/
 bower_components/
-*.csv
+*.log.csv
