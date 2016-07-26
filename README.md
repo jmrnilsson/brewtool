@@ -8,7 +8,6 @@ Application | Link/Command
 ------ | ------
 nodejs | https://nodejs.org/en/
 npm | https://nodejs.org/en/download/
-bower | `npm install -g bower`
 
 ## Simplified setup (without Arduino sensing)
 To get started; clone the run the setup. This will clear any cached dependencies, if they exists, and install them from scratch:
