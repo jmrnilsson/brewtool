@@ -17,9 +17,13 @@ define([
     var t = temp();
     return t || t === 0 ? temp() + ' °C' : '';
   });
-  var temperatureEvents = ko.pureComputed(function() {
+  var data = ko.pureComputed(function() {
     // alert(JSON.stringify(events.events()));
     return events.events().map(function(e) {return e.data.temperature;});
+  });
+  var labels = ko.pureComputed(function() {
+    // alert(JSON.stringify(events.events()));
+    return events.events().map(function(e) {return e.data.date;});
   });
 
   temp.subscribe(function() {
@@ -48,7 +52,8 @@ define([
     self.low = low;
     self.high = high;
     self.alarm = alarm;
-    self.temperatureEvents = temperatureEvents;
+    self.data = data;
+    self.labels = labels;
 
     // actions
     self.clear = clear;

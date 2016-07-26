@@ -19,18 +19,22 @@ server.listen(port);
 
 function getDateString() {
   var date = new Date();
-  return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' '
-         + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + ':'
-         + date.getMilliseconds();
+  return date.getFullYear()
+    + '-' + (date.getMonth() + 1)
+    + '-' + date.getDate()
+    + ' ' + date.getHours()
+    + ':' + date.getMinutes()
+    + ':' + date.getSeconds()
+    + ':' + date.getMilliseconds();
 }
 log = fs.createWriteStream(getDateString() + '.log.csv');
 log.write('UtcDate;TemperatureC;\n');
 
 serialPort.on('open', function() {
   serialPort.on('data', function(data) {
-    var utcDate = new Date().toUTCString();
-    log.write(getDateString() + ';' + data + ';\n');
-    io.sockets.emit('sense-temperature', { temperature: data, utc: utcDate });
+    var date = getDateString();
+    log.write(date + ';' + data + ';\n');
+    io.sockets.emit('sense-temperature', { temperature: data, date: date });
   });
 });
 
