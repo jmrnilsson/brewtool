@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^3.3.6",
+    "c3": "^0.4.11",
     "chart.js": "^2.2.0-rc.2",
     "font-awesome": "^4.6.3",
     "immutable": "^3.8.1",

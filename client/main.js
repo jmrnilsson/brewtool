@@ -7,8 +7,8 @@ require.config({
     toastr: './node_modules/toastr/toastr',
     path: './lib/path.min',
     immutable: './node_modules/immutable/dist/immutable',
-    chart: './node_modules/chart.js/dist/Chart',
-    knockoutchart: './lib/knockout.chart'
+    d3: './node_modules/d3/d3.min',
+    c3: './node_modules/c3/c3.min'
   },
   shim: {
     path: {exports: 'Path'}

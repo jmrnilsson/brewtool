@@ -40,7 +40,6 @@ define([
     }
   }
 
-
   function CalculatorViewModel() {
     var self = this;
 

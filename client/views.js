@@ -24,3 +24,11 @@ define('temperatureView', [
 
   return { viewModel: viewModel, template: template };
 });
+
+define('graphView', [
+  'models/graph'
+], function(viewModel) {
+  'use strict';
+
+  return { viewModel: viewModel, template: '<div id="chart"></div>' };
+});

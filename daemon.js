@@ -6,13 +6,16 @@ var SerialPort = require('serialport');
 var fs = require('fs');
 var rl = require('readline');
 
+
 // Alternatively new SerialPort("/dev/tty-usbserial1", { baudrate: 9600})
-// Alternatively new SerialPort("/dev/cu-usbmodel1421", options)
-// var serialPort = new SerialPort('COM4', options);
+// or new SerialPort("/dev/cu-usbmodel1421", options)
+// or new SerialPort('COM4', options);
 var options = { baudrate: 9600, parser: SerialPort.parsers.readline('\n') };
 var serialPort = new SerialPort('/dev/cu.usbmodem1421', options);
 var port = 3000;
 var log;
+var socketlist = [];
+
 app.use(express.static('./client/'));
 console.log('Daemon is listening on port ' + port + '.\nPress ctrl + c to close.');
 server.listen(port);
@@ -38,6 +41,14 @@ serialPort.on('open', function() {
   });
 });
 
+io.sockets.on('connection', function(socket) {
+  socketlist.push(socket);
+  socket.on('close', function() {
+    socketlist.splice(socketlist.indexOf(socket), 1);
+  });
+});
+
+
 if (process.platform === 'win32') {
   rl.createInterface({
     input: process.stdin,
@@ -50,6 +61,10 @@ if (process.platform === 'win32') {
 }
 
 process.on('SIGINT', function() {
+  io.server.close();
+  socketlist.forEach(function(socket) {
+    socket.destroy();
+  });
   log.end();
   process.exit();
 });

@@ -67,37 +67,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-
-      <canvas height="75em" data-bind="chart: { type: 'line', data: {
-      labels: ['57m', '54m', '51m', '48m', '45m', '42m', '39m', '36m', '33m', '30m', '27m',
-               '24m', '21m', '18m', '15m', '12m', '9m', '6m', '3m', '0m'],
-      datasets: [
-        {
-          label: 'My First dataset',
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: 'rgba(75,192,192,0.4)',
-          borderColor: 'rgba(75,192,192,1)',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(75,192,192,1)',
-          pointBackgroundColor: '#fff',
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: [66, 67, 66.75, 65, 66, 64, 64.5, 64.75, 66.25, 66, 66.5, 66.75, 67, 67, 67, 68, 67, 68, 68, 69],
-          spanGaps: false
-        }
-      ],
-      options: { observeChanges: true, throttle: 100 }
-    }}"></canvas>
-    <input type="text" class="form-control" aria-label="Current temperature" disabled="disabled" data-bind="value: data()">
+      <div data-bind="component: 'graph'"></div>
     </div>
   </div>
 </div>
