@@ -15,29 +15,21 @@ var serialPort = new SerialPort('/dev/cu.usbmodem1421', options);
 var port = 3000;
 var log;
 var socketlist = [];
+var isoDate;
 
 app.use(express.static('./client/'));
 console.log('Daemon is listening on port ' + port + '.\nPress ctrl + c to close.');
 server.listen(port);
 
-function getDateString() {
-  var date = new Date();
-  return date.getFullYear()
-    + '-' + (date.getMonth() + 1)
-    + '-' + date.getDate()
-    + ' ' + date.getHours()
-    + ':' + date.getMinutes()
-    + ':' + date.getSeconds()
-    + ':' + date.getMilliseconds();
-}
-log = fs.createWriteStream(getDateString() + '.log.csv');
+isoDate = new Date().toISOString();
+
+log = fs.createWriteStream(isoDate + '.log.csv');
 log.write('UtcDate;TemperatureC;\n');
 
 serialPort.on('open', function() {
   serialPort.on('data', function(data) {
-    var date = getDateString();
-    log.write(date + ';' + data + ';\n');
-    io.sockets.emit('sense-temperature', { temperature: data, date: date });
+    log.write(isoDate + ';' + data + ';\n');
+    io.sockets.emit('sense-temperature', { temperature: data, date: isoDate });
   });
 });
 

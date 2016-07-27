@@ -30,5 +30,5 @@ define('graphView', [
 ], function(viewModel) {
   'use strict';
 
-  return { viewModel: viewModel, template: '<div id="chart"></div>' };
+  return { viewModel: viewModel, template: '<div id="chart" width="600"></div>' };
 });
