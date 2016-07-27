@@ -1,6 +1,7 @@
 define([
+//  'ko',
   'c3'
-  // 'utils/events'
+  // , utils/events'
 ], function(c3) {
   'use strict';
 
@@ -14,6 +15,15 @@ define([
       }
     });
   }
+
+  /*
+  var data = ko.pureComputed(function() {
+    return events.events().map(function(e) {return e.data.temperature;});
+  });
+  var labels = ko.pureComputed(function() {
+    return events.events().map(function(e) {return e.data.date;});
+  });
+  */
 
   return Chart;
 });
