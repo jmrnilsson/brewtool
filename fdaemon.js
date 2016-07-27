@@ -10,10 +10,21 @@ app.use(express.static('./client/'));
 server.listen(port);
 console.log('Fake daemon is listening on port ' + port + '.\nPress ctrl + c to close.');
 
+function getDateString() {
+  var date = new Date();
+  return date.getFullYear()
+    + '-' + (date.getMonth() + 1)
+    + '-' + date.getDate()
+    + ' ' + date.getHours()
+    + ':' + date.getMinutes()
+    + ':' + date.getSeconds()
+    + ':' + date.getMilliseconds();
+}
+
 function emit(temperature) {
   var current = {
     temperature: temperature,
-    utc: new Date().toUTCString()
+    date: getDateString()
   };
   var next = Math.floor(Math.random() * 3) - 1 + temperature;
 

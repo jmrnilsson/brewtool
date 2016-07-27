@@ -7,9 +7,10 @@ define([
   'immutable',
   'text!./package.json',
   'socketio',
-  'views'
+  'views',
+  'd3'
 // eslint-disable-next-line no-unused-vars
-], function(ko, events, $, extensions, Path, Immutable, packageJson, io, views) {
+], function(ko, events, $, extensions, Path, Immutable, packageJson, io, views, d3) {
 
   function start() {
     // Declare routes
@@ -21,6 +22,7 @@ define([
     ko.components.register('temperature', { require: 'temperatureView' });
     ko.components.register('calculator', { require: 'calculatorView' });
     ko.components.register('log', { require: 'logView' });
+    ko.components.register('graph', { require: 'graphView' });
     ko.extenders.gravity = extensions.gravity;
     ko.extenders.float = extensions.float;
 
