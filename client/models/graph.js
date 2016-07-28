@@ -13,7 +13,7 @@ define([
   var times;
   var avgs;
   var precision;
-  // var chart;
+  var chart;
   // var load = 0;
 
   function Chart() {
@@ -47,30 +47,44 @@ define([
               time: parseFloat(times) / (e.length / precision)
             });
         }
-        c3.generate({
-          data: {
-            x: 'x',
+        if (e.length === precision) {
+          chart = c3.generate({
+            data: {
+              x: 'x',
+              columns: [
+                ['x'].concat(avgs.map(function(s) { return s.time; })),
+                ['temp0'].concat(avgs.map(function(s) { return s.temperature; }))
+              ]
+            },
+            axis: {
+              x: {
+                type: 'x',
+                tick: { // "2016-07-27 21:56:19:770" (_final.getTime() - _initial.getTime())/1000
+                  count: 4,
+                  format: function(dt) {
+                    return Math.round((new Date().getTime() - Math.round(dt)) / 1000) + ' s';
+                  }
+                }
+              },
+              y: {
+                max: 100,
+                min: 0
+              }
+            },
+            transition: {
+              duration: 250
+            }
+          });
+        } else {
+          chart.load({
             columns: [
               ['x'].concat(avgs.map(function(s) { return s.time; })),
               ['temp0'].concat(avgs.map(function(s) { return s.temperature; }))
-            ]
-          },
-          axis: {
-            x: {
-              type: 'x',
-              tick: { // "2016-07-27 21:56:19:770" (_final.getTime() - _initial.getTime())/1000
-                count: 4,
-                format: function(dt) {
-                  return Math.round((new Date().getTime() - Math.round(dt)) / 1000) + ' s';
-                }
-              }
-            },
-            y: {
-              max: 100,
-              min: 0
-            }
-          }
-        });
+            ],
+            duration: 250
+          });
+        }
+
       }
     });
   }
