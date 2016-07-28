@@ -28,7 +28,7 @@ define([
         created: new Date().toUTCString(),
         data: d
       });
-      if (events().length > 10000) {
+      if (events().length > 14400) {
         events.pop();
       }
     }

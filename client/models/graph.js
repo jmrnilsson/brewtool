@@ -6,6 +6,13 @@ define([
   'use strict';
 
   var e;
+  var i;
+  var j;
+  var chunked;
+  var temperatures;
+  var times;
+  var avgs;
+  var precision;
   // var chart;
   // var load = 0;
 
@@ -15,26 +22,52 @@ define([
       console.log(e.length);
       // console.log(['x'].concat(e.map(function(s) { return new Date(s.data.date).getTime(); })));
       // console.log(['load0'].concat(e.map(function(s) { return s.data.temperature; })));
-      if (e.length % 20 === 0) {
+      j = -1;
+      precision = 20;
+      chunked = [];
+      avgs = [];
+      if (e.length % precision === 0) {
+        for (i = 0; i < e.length; i++) {
+          if (i % (e.length / precision) === 0) {
+            j ++;
+            chunked[j] = [];
+          }
+          chunked[j].push({time: e[i].data.date, temperature: e[i].data.temperature});
+        }
+        for (i = 0; i < chunked.length; i++) {
+          temperatures = 0;
+          times = 0;
+          for (j = 0; j < chunked[i].length; j++) {
+            temperatures += chunked[i][j].temperature;
+            times += chunked[i][j].time;
+          }
+          avgs.push(
+            {
+              temperature: temperatures / (e.length / precision),
+              time: parseFloat(times) / (e.length / precision)
+            });
+        }
         c3.generate({
           data: {
             x: 'x',
             columns: [
-              ['x'].concat(e.map(function(s) { return new Date(s.data.date).getTime(); })),
-              ['load0'].concat(e.map(function(s) { return s.data.temperature; }))
+              ['x'].concat(avgs.map(function(s) { return s.time; })),
+              ['temp0'].concat(avgs.map(function(s) { return s.temperature; }))
             ]
           },
           axis: {
             x: {
               type: 'x',
-              tick: { // "2016-07-27 21:56:19:770"
+              tick: { // "2016-07-27 21:56:19:770" (_final.getTime() - _initial.getTime())/1000
                 count: 4,
-                format: function(dt) { return dt; }
+                format: function(dt) {
+                  return Math.round((new Date().getTime() - Math.round(dt)) / 1000) + ' s';
+                }
               }
             },
             y: {
-              max: 110,
-              min: -10
+              max: 100,
+              min: 0
             }
           }
         });
