@@ -4,18 +4,15 @@ define([
   'jquery',
   'utils/extensions',
   'path',
-  'immutable',
   'text!./package.json',
   'socketio',
-  'views',
-  'd3'
+  'views'
 // eslint-disable-next-line no-unused-vars
-], function(ko, events, $, extensions, Path, Immutable, packageJson, io, views, d3) {
+], function(ko, events, $, extensions, Path, packageJson, io, views) {
 
   function start() {
     // Declare routes
-    var routes = Immutable.List.of('temperature', 'calculator', 'log');
-    var model = { route: ko.observable(routes.get(0)) };
+    var model = { route: ko.observable('temperature') };
     var socket = null;
 
     // Register ko
@@ -27,10 +24,10 @@ define([
     ko.extenders.float = extensions.float;
 
     // Listen to paths
-    routes.forEach(function(r, index, all) {
-      Path.map('#/' + all.get(index)).to(function() { model.route(all.get(index)); });
-    });
-    Path.root('#/' + routes.get(0));
+    Path.map('#/temperature').to(function() { model.route('temperature'); });
+    Path.map('#/calculator').to(function() { model.route('calculator'); });
+    Path.map('#/log').to(function() { model.route('log'); });
+    Path.root('#/temperature');
     Path.listen();
 
     // Bind ko
