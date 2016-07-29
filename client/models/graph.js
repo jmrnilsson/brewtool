@@ -5,18 +5,49 @@ define([
 ], function(c3, events) {
   'use strict';
 
-  var e;
-  var i;
-  var j;
-  var chunked;
-  var temperatures;
-  var times;
-  var avgs;
-  var precision;
-  var chart;
   // var load = 0;
 
+  function columns(avgs) {
+    return [
+      ['x'].concat(avgs.map(function(s) { return s.time; })),
+      ['temp0 (°C)'].concat(avgs.map(function(s) { return s.temperature; }))
+    ];
+  }
+
+  function options() {
+    return {
+      axis: {
+        x: {
+          type: 'x',
+          tick: {
+            count: 4,
+            format: function(dt) {
+              return Math.round((new Date().getTime() - Math.round(dt)) / 1000) + ' s';
+            }
+          }
+        },
+        y: {
+          max: 100,
+          min: 0
+        }
+      },
+      transition: {
+        duration: 250
+      }
+    };
+  }
+
   function Chart() {
+    var e;
+    var i;
+    var j;
+    var chunked;
+    var temperatures;
+    var times;
+    var avgs;
+    var precision;
+    var chart;
+    var input;
     events.events.subscribe(function() {
       e = events.events().filter(function(event) {
         return event.topic === 'sense-temperature';
@@ -47,43 +78,12 @@ define([
             });
         }
         if (e.length === precision) {
-          chart = c3.generate({
-            data: {
-              x: 'x',
-              columns: [
-                ['x'].concat(avgs.map(function(s) { return s.time; })),
-                ['temp0 (°C)'].concat(avgs.map(function(s) { return s.temperature; }))
-              ]
-            },
-            axis: {
-              x: {
-                type: 'x',
-                tick: { // "2016-07-27 21:56:19:770" (_final.getTime() - _initial.getTime())/1000
-                  count: 4,
-                  format: function(dt) {
-                    return Math.round((new Date().getTime() - Math.round(dt)) / 1000) + ' s';
-                  }
-                }
-              },
-              y: {
-                max: 100,
-                min: 0
-              }
-            },
-            transition: {
-              duration: 250
-            }
-          });
+          input = {};
+          Object.assign(input, {data: {x: 'x', columns: columns(avgs)}}, options());
+          chart = c3.generate(input);
         } else {
-          chart.load({
-            columns: [
-              ['x'].concat(avgs.map(function(s) { return s.time; })),
-              ['temp0 (°C)'].concat(avgs.map(function(s) { return s.temperature; }))
-            ],
-            duration: 250
-          });
+          chart.load({columns: columns(avgs), duration: 250});
         }
-
       }
     });
   }
