@@ -50,9 +50,16 @@ define([
           }
         },
         y: {
+          tick: {
+            format: function(temp) { return Math.round(temp * 10) / 10; }
+          }
+        }
+        /* ,
+        y: {
           max: 100,
           min: 0
         }
+        */
       },
       transition: {
         duration: 250
@@ -91,7 +98,7 @@ define([
             times = 0;
           }
           times += e[i].data.date;
-          temperatures += e[i].data.temperature;
+          temperatures += parseFloat(e[i].data.temperature);
         }
         if (e.length === precision) {
           configuration = {data: {x: 'x', columns: columns(avgs)}};

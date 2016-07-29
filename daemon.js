@@ -11,25 +11,24 @@ var rl = require('readline');
 // or new SerialPort("/dev/cu-usbmodel1421", options)
 // or new SerialPort('COM4', options);
 var options = { baudrate: 9600, parser: SerialPort.parsers.readline('\n') };
-var serialPort = new SerialPort('/dev/cu.usbmodem1421', options);
+var serialPort = new SerialPort('/dev/cu.usbmodem1411', options);
 var port = 3000;
 var log;
 var socketlist = [];
-var isoDate;
+var time;
 
 app.use(express.static('./client/'));
 console.log('Daemon is listening on port ' + port + '.\nPress ctrl + c to close.');
 server.listen(port);
 
-isoDate = new Date().toISOString();
-
-log = fs.createWriteStream(isoDate + '.log.csv');
+log = fs.createWriteStream(new Date().toISOString() + '.log.csv');
 log.write('UtcDate;TemperatureC;\n');
 
 serialPort.on('open', function() {
   serialPort.on('data', function(data) {
-    log.write(isoDate + ';' + data + ';\n');
-    io.sockets.emit('sense-temperature', { temperature: data, date: isoDate });
+    time = new Date().getTime();
+    log.write(time + ';' + data + ';\n');
+    io.sockets.emit('sense-temperature', { temperature: data, date: time });
   });
 });
 
