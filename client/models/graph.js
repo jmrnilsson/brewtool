@@ -5,8 +5,6 @@ define([
 ], function(c3, events) {
   'use strict';
 
-  // var load = 0;
-
   function columns(avgs) {
     return [
       ['x'].concat(avgs.map(function(s) { return s.time; })),
@@ -40,42 +38,33 @@ define([
   function Chart() {
     var e;
     var i;
-    var j;
-    var chunked;
-    var temperatures;
-    var times;
     var avgs;
     var precision;
     var chart;
     var input;
+    var temperatures;
+    var times;
+
     events.events.subscribe(function() {
       e = events.events().filter(function(event) {
         return event.topic === 'sense-temperature';
       });
-      j = -1;
       precision = 20;
-      chunked = [];
       avgs = [];
       if (e.length % precision === 0) {
         for (i = 0; i < e.length; i++) {
           if (i % (e.length / precision) === 0) {
-            j ++;
-            chunked[j] = [];
+            if (i > 0) {
+              avgs.push({
+                temperature: temperatures / (e.length / precision),
+                time: parseFloat(times) / (e.length / precision)
+              });
+            }
+            temperatures = 0;
+            times = 0;
           }
-          chunked[j].push({time: e[i].data.date, temperature: e[i].data.temperature});
-        }
-        for (i = 0; i < chunked.length; i++) {
-          temperatures = 0;
-          times = 0;
-          for (j = 0; j < chunked[i].length; j++) {
-            temperatures += chunked[i][j].temperature;
-            times += chunked[i][j].time;
-          }
-          avgs.push(
-            {
-              temperature: temperatures / (e.length / precision),
-              time: parseFloat(times) / (e.length / precision)
-            });
+          times += e[i].data.date;
+          temperatures += e[i].data.temperature;
         }
         if (e.length === precision) {
           input = {};

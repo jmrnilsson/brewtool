@@ -31,9 +31,7 @@ define([
 
   // Less eager than wrapping evaluate as computed
   [sense, low, high, on].forEach(function(observable) {
-    observable.subscribe(function() {
-      evaluate();
-    });
+    observable.subscribe(evaluate);
   });
 
   return {
