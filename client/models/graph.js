@@ -18,7 +18,9 @@ define([
 
   function Chart() {
     events.events.subscribe(function() {
-      e = events.events();
+      e = events.events().filter(function(event) {
+        return event.topic === 'sense-temperature';
+      });
       j = -1;
       precision = 20;
       chunked = [];
