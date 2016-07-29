@@ -52,7 +52,7 @@ define([
               x: 'x',
               columns: [
                 ['x'].concat(avgs.map(function(s) { return s.time; })),
-                ['temp0'].concat(avgs.map(function(s) { return s.temperature; }))
+                ['temp0 (°C)'].concat(avgs.map(function(s) { return s.temperature; }))
               ]
             },
             axis: {
@@ -78,7 +78,7 @@ define([
           chart.load({
             columns: [
               ['x'].concat(avgs.map(function(s) { return s.time; })),
-              ['temp0'].concat(avgs.map(function(s) { return s.temperature; }))
+              ['temp0 (°C)'].concat(avgs.map(function(s) { return s.temperature; }))
             ],
             duration: 250
           });
