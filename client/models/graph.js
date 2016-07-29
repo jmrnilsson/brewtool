@@ -1,9 +1,14 @@
 define([
 //  'ko',
   'c3',
-  'utils/events'
-], function(c3, events) {
+  'utils/events',
+  'models/alarm'
+], function(c3, events, alarm) {
   'use strict';
+
+  var precision = 20;
+  var chart;
+  var ygridlines = [];
 
   function columns(avgs) {
     return [
@@ -11,6 +16,26 @@ define([
       ['temp0 (°C)'].concat(avgs.map(function(s) { return s.temperature; }))
     ];
   }
+
+  function evaluateGrid() {
+    // https://github.com/c3js/c3/blob/98769492d07b6103bfc30a0254ccb1e1ec1cca50/spec/api.grid-spec.js
+    var high = alarm.high();
+    var low = alarm.low();
+
+    chart.ygrids.remove(ygridlines);
+    ygridlines.length = 0;
+    if (low) {
+      ygridlines.push({value: low, class: 'gridAlarm', text: 'low'});
+    }
+    if (high) {
+      ygridlines.push({value: high, class: 'gridAlarm', text: 'high'});
+    }
+    chart.ygrids.add(ygridlines);
+  }
+
+  [alarm.low, alarm.high].forEach(function(observable) {
+    observable.subscribe(evaluateGrid);
+  });
 
   function options() {
     return {
@@ -31,6 +56,10 @@ define([
       },
       transition: {
         duration: 250
+      },
+      colors: {
+        alarm_low: '#ff0000',
+        alarm_high: '#ff0000'
       }
     };
   }
@@ -39,9 +68,7 @@ define([
     var e;
     var i;
     var avgs;
-    var precision;
-    var chart;
-    var input;
+    var configuration;
     var temperatures;
     var times;
 
@@ -67,10 +94,11 @@ define([
           temperatures += e[i].data.temperature;
         }
         if (e.length === precision) {
-          input = {};
-          Object.assign(input, {data: {x: 'x', columns: columns(avgs)}}, options());
-          chart = c3.generate(input);
+          configuration = {data: {x: 'x', columns: columns(avgs)}};
+          Object.assign(configuration, options());
+          chart = c3.generate(configuration);
         } else {
+          configuration = {data: {x: 'x', columns: columns(avgs)}};
           chart.load({columns: columns(avgs), duration: 250});
         }
       }
