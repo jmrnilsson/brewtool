@@ -46,11 +46,17 @@ h3, .h3 {
 i {
   color: #888;
 }
-
-.c3-ygrid-line.gridAlarm line {
-    stroke: pink;
+.c3-ygrid-line.high line {
+    stroke: darkred;
 }
-.c3-ygrid-line.gridAlarm text {
-    fill: pink;
+.c3-ygrid-line.high text {
+    fill: darkred;
+    text-transform: uppercase;
+}
+.c3-ygrid-line.low line {
+    stroke: darkorange;
+}
+.c3-ygrid-line.low text {
+    fill: darkorange;
     text-transform: uppercase;
 }

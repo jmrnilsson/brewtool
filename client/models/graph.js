@@ -17,25 +17,23 @@ define([
     ];
   }
 
-  function evaluateGrid() {
+  function evaluate() {
     // https://github.com/c3js/c3/blob/98769492d07b6103bfc30a0254ccb1e1ec1cca50/spec/api.grid-spec.js
     var high = alarm.high();
     var low = alarm.low();
 
-    chart.ygrids.remove(ygridlines);
-    ygridlines.length = 0;
-    if (low) {
-      ygridlines.push({value: low, class: 'gridAlarm', text: 'low'});
+    if (chart) {
+      chart.ygrids.remove(ygridlines);
+      ygridlines.length = 0;
+      if (low) {
+        ygridlines.push({value: low, class: 'low', text: 'low: ' + low + ' °C'});
+      }
+      if (high) {
+        ygridlines.push({value: high, class: 'high', text: 'high ' + high + ' °C'});
+      }
+      chart.ygrids.add(ygridlines);
     }
-    if (high) {
-      ygridlines.push({value: high, class: 'gridAlarm', text: 'high'});
-    }
-    chart.ygrids.add(ygridlines);
   }
-
-  [alarm.low, alarm.high].forEach(function(observable) {
-    observable.subscribe(evaluateGrid);
-  });
 
   function options() {
     return {
@@ -54,12 +52,6 @@ define([
             format: function(temp) { return Math.round(temp * 10) / 10; }
           }
         }
-        /* ,
-        y: {
-          max: 100,
-          min: 0
-        }
-        */
       },
       transition: {
         duration: 250
@@ -71,46 +63,55 @@ define([
     };
   }
 
-  function Chart() {
-    var e;
+  function graph(e) {
     var i;
-    var avgs;
     var configuration;
     var temperatures;
     var times;
+    var avgs = [];
+
+    for (i = 0; i < e.length; i++) {
+      if (i % (e.length / precision) === 0) {
+        if (i > 0) {
+          avgs.push({
+            temperature: temperatures / (e.length / precision),
+            time: parseFloat(times) / (e.length / precision)
+          });
+        }
+        temperatures = 0;
+        times = 0;
+      }
+      times += e[i].data.date;
+      temperatures += parseFloat(e[i].data.temperature);
+    }
+    if (e.length === precision) {
+      configuration = {data: {x: 'x', columns: columns(avgs)}};
+      Object.assign(configuration, options());
+      chart = c3.generate(configuration);
+    } else {
+      chart.load({columns: columns(avgs), duration: 250});
+    }
+  }
+
+  function subscribe() {
+    [alarm.low, alarm.high].forEach(function(observable) {
+      observable.subscribe(evaluate);
+    });
+
 
     events.events.subscribe(function() {
-      e = events.events().filter(function(event) {
+      var e = events.events().filter(function(event) {
         return event.topic === 'sense-temperature';
       });
-      precision = 20;
-      avgs = [];
       if (e.length % precision === 0) {
-        for (i = 0; i < e.length; i++) {
-          if (i % (e.length / precision) === 0) {
-            if (i > 0) {
-              avgs.push({
-                temperature: temperatures / (e.length / precision),
-                time: parseFloat(times) / (e.length / precision)
-              });
-            }
-            temperatures = 0;
-            times = 0;
-          }
-          times += e[i].data.date;
-          temperatures += parseFloat(e[i].data.temperature);
-        }
-        if (e.length === precision) {
-          configuration = {data: {x: 'x', columns: columns(avgs)}};
-          Object.assign(configuration, options());
-          chart = c3.generate(configuration);
-        } else {
-          configuration = {data: {x: 'x', columns: columns(avgs)}};
-          chart.load({columns: columns(avgs), duration: 250});
-        }
+        setTimeout(function() {
+          graph(e);
+        }, 0);
       }
     });
   }
 
-  return Chart;
+  return function() {
+    subscribe();
+  };
 });
