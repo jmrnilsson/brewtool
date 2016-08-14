@@ -2,17 +2,17 @@ define([], function() {
   'use strict';
 
   /*
-  Alcohol by volume formulas
+  ALCOHOL BY VOLUME FORMULAS
 
-  Simplified
+  SIMPLIFIED
   Handy simple formula commonly used.
   http://www.homebrewdad.com/abv_calculator.php
 
-  Compensated
+  COMPENSATED
   Makes adjustments for real extract. Slighly better than the simplified formula.
   http://www.ratebeer.com/forums/calculating-abv_121228.htm
 
-  Plato:
+  PLATO:
   Less accurate around 5%, but presumably better precision on high gravity > 10%.
   */
 
@@ -38,35 +38,25 @@ define([], function() {
 
   // Validation
   function validate(mode, originalGravity, finalGravity) {
-    var msg = 'Calculation mode type not available. Options include simple, compensated, plato';
-    var errors = [];
+    var m1 = 'Calculation mode type not available. Options include simple, compensated, plato';
+    var m2 = 'Final gravity is greater than original gravity';
+
+    function toMessage(gravityType, message) {
+      return gravityType + ' gravity is ' + message;
+    }
 
     function ensureBounds(gravity, gravityType) {
-      if (gravity === undefined) {
-        errors.push(gravityType + ' gravity is not set');
-      }
-      if (isNaN(gravity)) {
-        errors.push(gravityType + ' gravity is not a number');
-      }
-      if (gravity < 1) {
-        errors.push(gravityType + ' gravity is too low');
-      }
-      if (gravity > 1.3) {
-        errors.push(gravityType + ' gravity is too high');
-      }
+      if (!gravity) throw new TypeError(toMessage(gravityType, 'not set'));
+      if (isNaN(gravity)) throw new TypeError(toMessage(gravityType, 'not a number'));
+      if (gravity < 1) throw new RangeError(toMessage(gravityType, 'too low'));
+      if (gravity > 1.3) throw new RangeError(toMessage(gravityType, 'too high'));
     }
+
     ensureBounds(originalGravity, 'Original');
     ensureBounds(finalGravity, 'Final');
 
-    if (finalGravity > originalGravity) {
-      errors.push('Final gravity is greater than original gravity');
-    }
-
-    if (mode !== 'simple' && mode !== 'compensated' && mode !== 'plato') {
-      errors.push(msg);
-    }
-
-    return errors;
+    if (finalGravity > originalGravity) throw new RangeError(m2);
+    if (mode !== 'simple' && mode !== 'compensated' && mode !== 'plato') throw new RangeError(m1);
   }
 
   function toDecimal(value) {
@@ -76,23 +66,14 @@ define([], function() {
   function calculateAbv(mode, originalGravity, finalGravity) {
     var og = toDecimal(originalGravity);
     var fg = toDecimal(finalGravity);
-    var errors = validate(mode, og, fg);
+    validate(mode, og, fg);
 
-    if (errors.length > 0) {
-      throw new Error(errors[0]);
-    }
-
-    // Use switch to avoid hasOwnProperties and linter mistakes
     switch (mode) {
       case 'simple': return simple(og, fg);
-      case 'compensated': return compensated(og, fg);
       case 'plato': return plato(og, fg);
-      default: throw Error('Something went wrong');
+      default: return compensated(og, fg);
     }
   }
 
-  return {
-    calculate: calculateAbv,
-    errors: validate
-  };
+  return { calculate: calculateAbv };
 });

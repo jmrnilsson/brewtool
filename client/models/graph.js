@@ -29,7 +29,7 @@ define([
         ygridlines.push({value: low, class: 'low', text: 'low: ' + low + ' °C'});
       }
       if (high) {
-        ygridlines.push({value: high, class: 'high', text: 'high ' + high + ' °C'});
+        ygridlines.push({value: high, class: 'high', text: 'high: ' + high + ' °C'});
       }
       chart.ygrids.add(ygridlines);
     }
