@@ -10,12 +10,12 @@ SHELL=bash
 
 .PHONY: setup lint clean
 
-clean: logs
+clean:
 	@ rm -rf ./node_modules
 	@ rm -rf ./client/libs
 	@ mkdir ./client/libs
 
-setup: package lint
+setup: lint package
 
 package: client/package.old
 
