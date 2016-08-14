@@ -4,7 +4,7 @@ define([
   'jquery',
   'utils/extensions',
   'path',
-  'text!./package.json',
+  'text!./packages.old',
   'socketio',
   'views'
 // eslint-disable-next-line no-unused-vars

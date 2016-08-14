@@ -14,29 +14,26 @@ define([
   });
   var abv = ko.observable();
 
-  function format(alcoholByVolume) {
+  function toAbvText(alcoholByVolume) {
     return alcoholByVolume ? alcoholByVolume.toFixed(2) + ' %' : 'N/A';
   }
-
 
   function calculate() {
     var og = gravity.original();
     var fg = gravity.final();
     var m = mode();
-    var newAbv;
+    var nextAlcholByVolume;
     try {
-      newAbv = AbvCalculator.calculate(m, og, fg);
-      abv(format(newAbv));
+      nextAlcholByVolume = AbvCalculator.calculate(m, og, fg);
+      abv(toAbvText(nextAlcholByVolume));
 
-      // Publish only user-initiated
+      // Publish ony user-initiated
       if (arguments.length > 0) {
-        events.emit('calculated-abv', { abv: newAbv, mode: m });
+        events.emit('calculated-abv', { abv: nextAlcholByVolume, mode: m });
       }
     } catch (error) {
-      abv(format(null));
-      AbvCalculator.errors(m, og, fg).forEach(function(e) {
-        toastr.error(e);
-      });
+      abv(toAbvText(null));
+      toastr.error(error.message);
     }
   }
 

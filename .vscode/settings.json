@@ -4,6 +4,7 @@
   "files.exclude": {
     "**/*node_modules": true,
     "*.log.csv": true,
-    "client/lib": true
-  }
+    "client/libs": true
+  },
+  "editor.rulers": [100]
 }

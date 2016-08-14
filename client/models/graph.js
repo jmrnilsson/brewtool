@@ -29,7 +29,7 @@ define([
         ygridlines.push({value: low, class: 'low', text: 'low: ' + low + ' °C'});
       }
       if (high) {
-        ygridlines.push({value: high, class: 'high', text: 'high ' + high + ' °C'});
+        ygridlines.push({value: high, class: 'high', text: 'high: ' + high + ' °C'});
       }
       chart.ygrids.add(ygridlines);
     }
@@ -43,7 +43,12 @@ define([
           tick: {
             count: 4,
             format: function(dt) {
-              return Math.round((new Date().getTime() - Math.round(dt)) / 1000) + ' s';
+              var totalSeconds = Math.round((new Date().getTime() - Math.round(dt)) / 1000);
+              var minutes = Math.floor(totalSeconds / 60);
+              if (minutes) {
+                return minutes + 'm ' + totalSeconds % 60 + 's';
+              }
+              return totalSeconds + 's';
             }
           }
         },
