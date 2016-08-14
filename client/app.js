@@ -4,11 +4,12 @@ define([
   'jquery',
   'utils/extensions',
   'path',
-  'text!./package.json',
+  'text!./packages.old',
   'socketio',
-  'views'
+  'views',
+  'moment'
 // eslint-disable-next-line no-unused-vars
-], function(ko, events, $, extensions, Path, packageJson, io, views) {
+], function(ko, events, $, extensions, Path, packageJson, io, views, m) {
 
   function start() {
     // Declare routes

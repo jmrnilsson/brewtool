@@ -2,3 +2,5 @@ node_modules/
 client/node_components/
 bower_components/
 *.log.csv
+client/packages.old
+client/libs/
