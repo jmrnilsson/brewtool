@@ -20,8 +20,8 @@ setup: package lint
 package: client/package.old
 
 client/package.old: package.json
-	npm install
-	# npm outdated
+	@ npm install
+	@ npm outdated
 	cp -f ./node_modules/jquery/dist/jquery.min.js ./client/libs/
 	cp -f ./node_modules/knockout/build/output/knockout-latest.js ./client/libs/
 	cp -f ./node_modules/text/text.js ./client/libs/
@@ -36,7 +36,7 @@ client/package.old: package.json
 	cp -rf ./node_modules/bootstrap/dist ./client/libs/bootstrap
 	cp -f ./node_modules/requirejs/require.js ./client/libs/
 	cp -f ./node_modules/jquery/dist/jquery.min.js ./client/libs/
-	cp -f package.json ./client/package.old
+	cp -f package.json ./client/packages.old
 
 
 
