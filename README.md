@@ -14,12 +14,11 @@ To get started; clone the run the setup. This will clear any cached dependencies
 
     git clone https://github.com/jmrnilsson/brewtool.git
     cd brewtool
-    sh setup.sh
+    make fake-run
 
-That's all. To start type command mentioned below. This will start a simulated daemon and open a browser (on OSX at least) which may change the temperature one degree in either direction every two seconds.
+Navigate to url below or simply type;
 
     open http://localhost:3000/
-    sh run.sh
 
 That's it. Have fun!
 
@@ -42,14 +41,9 @@ Install Arduino Software | IDE https://www.arduino.cc/en/Guide/HomePage | Other 
 * Make sure all the node packages are installed (see below)
 * Browse to http://localhost:3000/
 
-Make sure all packages are installed type in the root of the repository:
-
-    npm install serialport --save
-    sh setup.sh
-
 To start type:
 
-    node daemon.js
+    make run
 
 ### Additional information about the Arduino setup
 * For information on how to include Arduino libraries see, http://arduino.cc/en/Guide/Libraries.
