@@ -6,10 +6,9 @@ define([
   'path',
   'text!./packages.old',
   'socketio',
-  'views',
-  'moment'
+  'views'
 // eslint-disable-next-line no-unused-vars
-], function(ko, events, $, extensions, Path, packageJson, io, views, m) {
+], function(ko, events, $, extensions, Path, packageJson, io, views) {
 
   function start() {
     // Declare routes
