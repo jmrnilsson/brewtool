@@ -8,14 +8,20 @@ SHELL=bash
 ## Setup
 ######################################################
 
-.PHONY: setup lint
+.PHONY: setup lint clean
 
-setup: client/packages.old lint
+clean: logs
+	@ rm -rf ./node_modules
+	@ rm -rf ./client/libs
+	@ mkdir ./client/libs
 
-client/packages.old:
+setup: package lint
+
+package: client/package.old
+
+client/package.old: package.json
 	npm install
 	# npm outdated
-	cp -f ./package.json ./client/packages.old
 	cp -f ./node_modules/jquery/dist/jquery.min.js ./client/libs/
 	cp -f ./node_modules/knockout/build/output/knockout-latest.js ./client/libs/
 	cp -f ./node_modules/text/text.js ./client/libs/
@@ -30,6 +36,8 @@ client/packages.old:
 	cp -rf ./node_modules/bootstrap/dist ./client/libs/bootstrap
 	cp -f ./node_modules/requirejs/require.js ./client/libs/
 	cp -f ./node_modules/jquery/dist/jquery.min.js ./client/libs/
+	cp -f package.json ./client/package.old
+
 
 
 lint:
