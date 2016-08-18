@@ -1,5 +1,7 @@
 # brewtool
 
+[![Dependencies](https://david-dm.org/jmrnilsson/brewtool.svg)](https://david-dm.org/jmrnilsson/brewtool#info=dependencies&view=table)
+
 ## Description
 A small web application for monitoring brewing and sparging temperature when brewing beer or really anything. It also provides a calculator and has a log thingy. It is intended to be used with an Arduino but also include a fake daemon to "simulate" temperature changes.
 
