@@ -16,7 +16,7 @@ require.config({
 });
 
 require(['jasmine-boot'], function() {
-  require(['spec/abvCalculatorTests'], function() {
+  require(['spec/abvCalculatorTests'], function() {  // eslint-disable-line global-require
     window.onload();
   });
 });

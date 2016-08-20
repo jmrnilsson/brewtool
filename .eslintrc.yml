@@ -19,6 +19,7 @@ rules:
     space-before-function-paren:
         - 2
         - never
+    no-mixed-operators: 0
 extends: airbnb/legacy
 parserOptions:
         ecmaVersion: 5
