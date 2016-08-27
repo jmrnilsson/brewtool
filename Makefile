@@ -29,8 +29,7 @@ client/package.old: package.json
 	cp -f ./node_modules/toastr/toastr.js ./client/libs/
 	cp -f ./node_modules/toastr/build/toastr.min.css ./client/libs/
 	cp -f ./node_modules/d3/build/d3.min.js ./client/libs/
-	cp -f ./node_modules/c3/c3.min.js ./client/libs/
-	cp -f ./node_modules/c3/c3.min.css ./client/libs/
+	cp -rf ./node_modules/c3 ./client/libs/c3
 	curl -OL https://raw.githubusercontent.com/mtrpcic/pathjs/master/path.min.js;
 	mv path.min.js ./client/libs/
 	cp -rf ./node_modules/bootstrap/dist ./client/libs/bootstrap
