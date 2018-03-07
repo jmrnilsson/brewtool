@@ -1,9 +1,9 @@
 define([
-//  'ko',
+  'd3',
   'c3',
   'utils/events',
   'models/alarm'
-], function(c3, events, alarm) {
+], function(_, c3, events, alarm) {
   'use strict';
 
   var precision = 20;
@@ -103,9 +103,8 @@ define([
       observable.subscribe(evaluate);
     });
 
-
-    events.events.subscribe(function() {
-      var e = events.events().filter(function(event) {
+    events.fiveMinutes.subscribe(function() {
+      var e = events.fiveMinutes().filter(function(event) {
         return event.topic === 'sense-temperature';
       });
       if (e.length % precision === 0) {

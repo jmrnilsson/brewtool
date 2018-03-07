@@ -2,7 +2,7 @@ var express = require('express');
 var app = module.exports = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-var SerialPort = require('serialport');
+// var SerialPort = require('serialport');
 var fs = require('fs');
 var rl = require('readline');
 
@@ -10,8 +10,8 @@ var rl = require('readline');
 //  - /dev/tty-usbserial1
 //  - /dev/cu-usbmodel1421
 //  - COM4
-var options = { baudrate: 9600, parser: SerialPort.parsers.readline('\n') };
-var serialPort = new SerialPort('/dev/cu.usbmodem1411', options);
+// var options = { baudrate: 9600, parser: SerialPort.parsers.readline('\n') };
+// var serialPort = new SerialPort('/dev/cu.usbmodem1411', options);
 var port = 3000;
 var log;
 var socketlist = [];
@@ -24,13 +24,13 @@ server.listen(port);
 log = fs.createWriteStream(new Date().toISOString() + '.log.csv');
 log.write('UtcDate;TemperatureC;\n');
 
-serialPort.on('open', function() {
-  serialPort.on('data', function(data) {
+/* serialPort.on('open', function () {
+  serialPort.on('data', function (data) {
     time = new Date().getTime();
     log.write(time + ';' + data + ';\n');
     io.sockets.emit('sense-temperature', { temperature: data, date: time });
   });
-});
+}); */
 
 io.sockets.on('connection', function(socket) {
   socketlist.push(socket);
@@ -38,7 +38,6 @@ io.sockets.on('connection', function(socket) {
     socketlist.splice(socketlist.indexOf(socket), 1);
   });
 });
-
 
 if (process.platform === 'win32') {
   rl.createInterface({
@@ -59,3 +58,18 @@ process.on('SIGINT', function() {
   log.end();
   process.exit();
 });
+
+function emit(temperature) {
+  var next = Math.floor(Math.random() * 3) - 1 + temperature;
+
+  function send() {
+    time = new Date().getTime();
+    log.write(time + ';' + temperature + ';\n');
+    io.sockets.emit('sense-temperature', { temperature: temperature, date: time });
+    emit(next);
+  }
+
+  setTimeout(send, 100);
+}
+
+emit(Math.floor((Math.random() * 100) + 1));
