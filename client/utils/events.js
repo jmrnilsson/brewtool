@@ -5,6 +5,12 @@ define([
 
   var session;
   var events = ko.observableArray();
+  var fiveMinutes = ko.computed(function() {
+    return ko.utils.arrayFilter(events(), function(e) {
+      var future = new Date(Date.parse(e.created) + 2 * 60000);
+      return future > new Date();
+    });
+  });
 
   function newGuid() {
     function s() {
@@ -37,6 +43,7 @@ define([
 
   return {
     events: events,
+    fiveMinutes: fiveMinutes,
     emit: emit
   };
 });

@@ -25,7 +25,7 @@ client/package.old: package.json
 	cp -f ./node_modules/jquery/dist/jquery.min.js ./client/libs/
 	cp -f ./node_modules/knockout/build/output/knockout-latest.js ./client/libs/
 	cp -f ./node_modules/text/text.js ./client/libs/
-	cp -f ./node_modules/socket.io-client/socket.io.js ./client/libs/
+	cp -f ./node_modules/socket.io-client/dist/socket.io.js ./client/libs/
 	cp -f ./node_modules/toastr/toastr.js ./client/libs/
 	cp -f ./node_modules/toastr/build/toastr.min.css ./client/libs/
 	cp -f ./node_modules/d3/d3.min.js ./client/libs/
@@ -67,6 +67,6 @@ run: setup
 
 frun: setup
 	@ echo "Starting fake daemon"
-	@ node ./fdaemon.js
+	@ node ./fakeDaemon.js
 
 fake-run: frun
