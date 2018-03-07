@@ -7,7 +7,7 @@ define([
     target.hasError = ko.observable();
 
     function validate(v) {
-      var errors = v === undefined || isNaN(v) || v < 1 || v > 1.3 && v < 1000 || v > 1300;
+      var errors = v === undefined || window.isNaN(v) || v < 1 || v > 1.3 && v < 1000 || v > 1300;
       target.hasError(errors);
     }
     validate(target());

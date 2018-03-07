@@ -24,10 +24,10 @@
     "toastr": "2.1.4"
   },
   "devDependencies": {
-    "eslint": "^3",
-    "eslint-plugin-react": "^6",
-    "eslint-config-airbnb": "^10",
-    "eslint-plugin-import": "^1.0",
-    "eslint-plugin-jsx-a11y": "2.1.0"
+    "eslint": "4.18.2",
+    "eslint-plugin-react": "7.7.0",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-plugin-import": "2.9.0",
+    "eslint-plugin-jsx-a11y": "6.0.3"
   }
 }
