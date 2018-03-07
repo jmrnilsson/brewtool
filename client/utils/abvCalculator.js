@@ -47,7 +47,7 @@ define([], function() {
 
     function ensureBounds(gravity, gravityType) {
       if (!gravity) throw new TypeError(toMessage(gravityType, 'not set'));
-      if (isNaN(gravity)) throw new TypeError(toMessage(gravityType, 'not a number'));
+      if (window.isNaN(gravity)) throw new TypeError(toMessage(gravityType, 'not a number'));
       if (gravity < 1) throw new RangeError(toMessage(gravityType, 'too low'));
       if (gravity > 1.3) throw new RangeError(toMessage(gravityType, 'too high'));
     }

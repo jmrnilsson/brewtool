@@ -34,8 +34,8 @@ define([
     document.getElementsByClassName('navbar-text')[0].innerHTML = JSON.parse(packageJson).version;
     ko.applyBindings(model, document.body);
 
-    // Attach listener (this also wires socket.io)
-    socket = io.connect('http://' + location.host);
+    // Attach listener
+    socket = io.connect('http://' + window.location.host);
     socket.on('sense-temperature', function(event) {
       events.emit('sense-temperature', event);
     });

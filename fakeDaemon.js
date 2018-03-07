@@ -1,21 +1,18 @@
 var express = require('express');
-var app = module.exports = express();
+var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 // var SerialPort = require('serialport');
 var fs = require('fs');
 var rl = require('readline');
 
-// Common USB COM port names:
-//  - /dev/tty-usbserial1
-//  - /dev/cu-usbmodel1421
-//  - COM4
-// var options = { baudrate: 9600, parser: SerialPort.parsers.readline('\n') };
-// var serialPort = new SerialPort('/dev/cu.usbmodem1411', options);
+// Common USB COM port names: /dev/tty-usbserial1, /dev/cu-usbmodel1421, COM4
 var port = 3000;
 var log;
 var socketlist = [];
 var time;
+
+module.exports = app;
 
 app.use(express.static('./client/'));
 console.log('Daemon is listening on port ' + port + '.\nPress ctrl + c to close.');
