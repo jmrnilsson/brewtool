@@ -1,6 +1,6 @@
 {
   "name": "brewtool",
-  "version": "0.1.0",
+  "version": "0.18.3",
   "description": "Brew temperature graphing tool and calculator using serial and socket.io",
   "main": "daemon.js",
   "scripts": {
