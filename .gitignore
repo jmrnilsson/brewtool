@@ -4,3 +4,4 @@ bower_components/
 *.log.csv
 client/packages.old
 client/libs/
+.idea

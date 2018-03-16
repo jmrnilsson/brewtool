@@ -1,11 +1,11 @@
 define([
-//  'ko',
   'c3',
   'utils/events',
   'models/alarm'
 ], function(c3, events, alarm) {
   'use strict';
 
+  var init = 0;
   var precision = 20;
   var chart;
   var ygridlines = [];
@@ -116,7 +116,12 @@ define([
     });
   }
 
-  return function() {
-    subscribe();
-  };
+  function Graph() {
+    init += 1;
+    if (init === 1) {
+      subscribe();
+    }
+  }
+
+  return Graph;
 });
