@@ -10,21 +10,25 @@ define([
 // eslint-disable-next-line no-unused-vars
 ], function(ko, events, $, extensions, Path, packageJson, io, views) {
 
-  function start() {
-    var model = { route: ko.observable('temperature') };
-    var socket = null;
-    var e;
-    var i;
-    var title = ko.computed(function() {
-      for (i = 0; i < events.events().length; i++) {
-        e = events.events()[i];
-        if (e.topic === 'sense-temperature') {
-          return parseFloat(e.data.temperature) + ' °C';
-        }
-      }
-      return undefined;
+  function App() {
+    const model = { route: ko.observable('temperature') };
+    const temperature = ko.observable();
+    let socket = null;
+    registerKoAndPathJs();
+  }
 
-    });
+  function registerKoAndPathJs() {
+    // var model = ;
+    // var title = ko.computed(function() {
+    //   for (i = 0; i < events.events().length; i++) {
+    //     e = events.events()[i];
+    //     if (e.topic === 'sense-temperature') {
+    //       return parseFloat(e.data.temperature) + ' °C';
+    //     }
+    //   }
+    //   return undefined;
+
+    // });
 
     // Register ko
     ko.components.register('temperature', { require: 'temperatureView' });
