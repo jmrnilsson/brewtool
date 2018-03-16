@@ -11,9 +11,20 @@ define([
 ], function(ko, events, $, extensions, Path, packageJson, io, views) {
 
   function start() {
-    // Declare routes
     var model = { route: ko.observable('temperature') };
     var socket = null;
+    var e;
+    var i;
+    var title = ko.computed(function() {
+      for (i = 0; i < events.events().length; i++) {
+        e = events.events()[i];
+        if (e.topic === 'sense-temperature') {
+          return parseFloat(e.data.temperature) + ' °C';
+        }
+      }
+      return undefined;
+
+    });
 
     // Register ko
     ko.components.register('temperature', { require: 'temperatureView' });
@@ -33,6 +44,7 @@ define([
     // Bind ko
     document.getElementsByClassName('navbar-text')[0].innerHTML = JSON.parse(packageJson).version;
     ko.applyBindings(model, document.body);
+    ko.applyBindings({title: title}, document.head);
 
     // Attach listener
     socket = io.connect('http://' + window.location.host);
