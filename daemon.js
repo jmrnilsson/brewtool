@@ -7,7 +7,7 @@ var fs = require('fs');
 var rl = require('readline');
 
 // Common USB COM port names: /dev/tty-usbserial1, /dev/cu-usbmodel1421, COM4
-var options = { baudrate: 9600, parser: SerialPort.parsers.readline('\n') };
+var options = { baudRate: 9600, parser: new SerialPort.parsers.Readline('\n') };
 var serialPort = new SerialPort('/dev/cu.usbmodem1411', options);
 var port = 3000;
 var log;
