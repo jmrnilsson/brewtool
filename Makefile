@@ -13,7 +13,7 @@ SHELL=bash
 clean:
 	@ rm -rf ./node_modules
 	@ rm -rf ./client/libs
-	@ mkdir ./client/libs
+	@ mkdir -p ./client/libs
 
 setup: lint package
 
@@ -22,6 +22,7 @@ package: client/package.old
 client/package.old: package.json
 	@ npm install
 	@ npm outdated
+	mkdir -p ./client/libs
 	cp -f ./node_modules/jquery/dist/jquery.min.js ./client/libs/
 	cp -f ./node_modules/knockout/build/output/knockout-latest.js ./client/libs/
 	cp -f ./node_modules/text/text.js ./client/libs/
