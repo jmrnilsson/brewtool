@@ -38,7 +38,6 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
-
 if (process.platform === 'win32') {
   rl.createInterface({
     input: process.stdin,
