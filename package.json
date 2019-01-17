@@ -10,7 +10,7 @@
   "author": "jmrnilsson",
   "license": "MIT",
   "dependencies": {
-    "bootstrap": "3.3.7",
+    "bootstrap": "3.4.0",
     "c3": "0.4.21",
     "d3": "3.5.0",
     "express": "4.16.3",
